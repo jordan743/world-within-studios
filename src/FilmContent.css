@@ -37,7 +37,8 @@
 
 .fc-trailer-soon span {
   font-family: var(--font-d);
-  font-size: clamp(36px, 6vw, 80px);
+  font-size: clamp(20px, 3.5vw, 52px);
+  white-space: nowrap;
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 0.92;

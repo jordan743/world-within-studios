@@ -29,6 +29,29 @@
   transform: scale(1.05);
 }
 
+.pc-guest__mute {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 4;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #fff4e2;
+  opacity: 0;
+  transition: opacity 0.3s ease, background 0.2s;
+  backdrop-filter: blur(4px);
+}
+
+.pc-guest:hover .pc-guest__mute { opacity: 1; }
+.pc-guest__mute:hover { background: rgba(0,0,0,0.75); }
+
 .pc-guest__video {
   position: absolute;
   inset: 0;
@@ -110,6 +133,23 @@
 .pc-episodes__list {
   display: flex;
   flex-direction: column;
+  max-height: 660px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,244,226,0.12) transparent;
+}
+
+.pc-episodes__list::-webkit-scrollbar {
+  width: 3px;
+}
+
+.pc-episodes__list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.pc-episodes__list::-webkit-scrollbar-thumb {
+  background: rgba(255,244,226,0.15);
+  border-radius: 2px;
 }
 
 .pc-ep {
@@ -131,7 +171,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(255, 244, 226, 0.35);
+  color: #fff4e2;
   white-space: nowrap;
 }
 

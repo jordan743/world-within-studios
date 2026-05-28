@@ -79,23 +79,23 @@
 
 .cs-film-hero {
   background: #000;
-  min-height: 100vh;
+  min-height: 85vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
-  padding: 120px 80px 80px;
+  padding: 120px 150px 80px;
   gap: 80px;
 }
 
 .cs-film-hero__left {
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 48px;
 }
 
 .cs-film-hero__title {
   font-family: var(--font-d);
-  font-size: clamp(36px, 5vw, 76px);
+  font-size: clamp(28px, 3.8vw, 56px);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 0.92;
@@ -120,6 +120,20 @@
   max-width: 520px;
 }
 
+.cs-film-hero__platforms {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.cs-film-hero__platforms a {
+  color: rgba(255,244,226,0.7);
+  display: flex;
+  transition: color 0.2s;
+}
+
+.cs-film-hero__platforms a:hover { color: #fff4e2; }
+
 .cs-film-hero__cta {
   font-family: var(--font-b);
   font-size: 11px;
@@ -143,7 +157,7 @@
 
 .cs-film-hero__poster {
   width: 100%;
-  max-width: 300px;
+  max-width: 345px;
   height: auto;
   border-radius: 8px;
   display: block;
@@ -154,8 +168,8 @@
 
 .cs-hero {
   position: relative;
-  height: 100vh;
-  min-height: 600px;
+  height: 85vh;
+  min-height: 500px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -171,9 +185,14 @@
   object-position: center;
 }
 
+.cs-hero__bg--left {
+  object-position: left top;
+}
+
 .cs-hero__bg--right {
   left: 50%;
   width: 50%;
+  object-position: right top;
 }
 
 .cs-hero__bg--dark {
@@ -205,12 +224,12 @@
 .cs-hero__left {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 48px;
 }
 
 .cs-hero__title {
   font-family: var(--font-d);
-  font-size: clamp(40px, 5.5vw, 80px);
+  font-size: clamp(32px, 4.5vw, 56px);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 0.92;
@@ -272,7 +291,8 @@
 
 .cs-trailer__text {
   font-family: var(--font-d);
-  font-size: clamp(36px, 6vw, 80px);
+  font-size: clamp(20px, 3.5vw, 52px);
+  white-space: nowrap;
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 0.92;
@@ -426,7 +446,7 @@
     min-height: auto;
   }
   .cs-film-hero__right { order: -1; }
-  .cs-film-hero__poster { max-width: 208px; }
+  .cs-film-hero__poster { max-width: 239px; }
 
   .cs-hero__body {
     grid-template-columns: 1fr;
@@ -447,7 +467,7 @@
   .cs-more__card { flex: 0 0 180px; }
 
   .cs-film-hero { gap: 32px; }
-  .cs-film-hero__title { font-size: clamp(30px, 9vw, 56px); }
+  .cs-film-hero__title { font-size: clamp(32px, 10vw, 56px); }
   .cs-film-hero__poster { max-width: 72vw; }
   .cs-film-hero__desc { font-size: 13px; }
 
