@@ -1,5 +1,6 @@
 import { useParams, Link } from 'react-router-dom'
 import { PROJECTS } from './projectsData.js'
+import Nav from './Nav.jsx'
 import PodcastContent from './PodcastContent.jsx'
 import FilmContent from './FilmContent.jsx'
 import './Studios.css'
@@ -23,20 +24,6 @@ function SideStrips() {
         <span className="strip__mark strip__mark--bot">X</span>
       </div>
     </>
-  )
-}
-
-function Nav() {
-  return (
-    <header className="wws-nav">
-      <a href="https://worldwithin.org" target="_blank" rel="noopener noreferrer" className="wws-nav__link">CHECK OUT WORLD WITHIN</a>
-      <Link to="/" className="wws-nav__logo" aria-label="World Within Studios">
-        <img src="/assets/logo-studios.svg" alt="World Within Studios" />
-      </Link>
-      <div className="wws-nav__right">
-        <a href="mailto:info@worldwithin.org" className="wws-nav__link">CONTACT</a>
-      </div>
-    </header>
   )
 }
 

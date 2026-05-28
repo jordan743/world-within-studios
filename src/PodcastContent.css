@@ -167,13 +167,9 @@
 
 @media (max-width: 900px) {
   .pc-guests {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     padding: 40px 32px;
-  }
-
-  .pc-guest {
-    aspect-ratio: 4 / 3;
   }
 
   .pc-episodes {
@@ -190,7 +186,6 @@
   .pc-ep__header {
     grid-template-columns: auto 1fr;
     gap: 16px;
-    flex-wrap: wrap;
   }
 
   .pc-ep__watch,
@@ -199,8 +194,19 @@
   }
 }
 
+@media (max-width: 640px) {
+  .pc-guests {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .pc-guest { aspect-ratio: 4 / 3; }
+}
+
 @media (max-width: 600px) {
   .pc-guests { padding: 32px 20px; }
   .pc-episodes { padding: 48px 20px 64px; }
   .pc-ep__header { gap: 12px; }
+  .pc-ep__desc { font-size: 13px; }
+  .pc-ep { padding: 28px 0; }
 }

@@ -350,12 +350,22 @@
   .cs-prevnext { padding: 0 32px; }
 }
 
-@media (max-width: 600px) {
-  .cs-film-hero { padding: 80px 20px 48px; gap: 32px; }
-  .cs-film-hero__poster { max-width: 80vw; }
+@media (max-width: 640px) {
+  .cs-film-hero { padding: 88px 20px 48px; }
+}
 
+@media (max-width: 600px) {
+  .cs-film-hero { gap: 32px; }
+  .cs-film-hero__title { font-size: clamp(30px, 9vw, 56px); }
+  .cs-film-hero__poster { max-width: 72vw; }
+  .cs-film-hero__desc { font-size: 13px; }
+
+  .cs-hero { min-height: 520px; }
   .cs-hero__body { padding: 0 20px 32px; }
-  .cs-hero__title { font-size: clamp(32px, 10vw, 56px); }
+  .cs-hero__title { font-size: clamp(30px, 10vw, 56px); }
+  .cs-hero__desc { font-size: 13px; }
+
+  .cs-trailer { min-height: 400px; }
 
   .cs-prevnext { padding: 0 20px; height: 60px; }
   .cs-prevnext__label { display: none; }
