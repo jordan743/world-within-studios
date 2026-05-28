@@ -1,5 +1,10 @@
 /* ── Film Trailer Section ────────────────────────────────────────── */
 
+@keyframes trailer-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.15; }
+}
+
 .fc-trailer-section {
   background: #000;
   padding: 0 80px 100px;
@@ -26,27 +31,26 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 360px;
-  margin: 0 80px 100px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 244, 226, 0.08);
+  padding: 80px 0;
+  margin-bottom: 40px;
 }
 
 .fc-trailer-soon span {
   font-family: var(--font-d);
-  font-size: clamp(20px, 3vw, 40px);
+  font-size: clamp(36px, 6vw, 80px);
   font-weight: 800;
-  letter-spacing: 0.1em;
+  letter-spacing: -0.03em;
+  line-height: 0.92;
   text-transform: uppercase;
-  color: rgba(255, 244, 226, 0.2);
+  color: #fff4e2;
+  text-align: center;
+  animation: trailer-blink 2.4s ease-in-out infinite;
 }
 
 @media (max-width: 900px) {
   .fc-trailer-section { padding: 0 32px 80px; }
-  .fc-trailer-soon { margin: 0 32px 80px; height: 260px; }
 }
 
 @media (max-width: 600px) {
   .fc-trailer-section { padding: 0 20px 64px; }
-  .fc-trailer-soon { margin: 0 20px 64px; height: 200px; }
 }

@@ -1,6 +1,8 @@
+import { useRef } from 'react'
 import './PodcastContent.css'
 
 const CDN = 'https://framerusercontent.com/images/'
+const ASSET = 'https://framerusercontent.com/assets/'
 
 const GUESTS = [
   {
@@ -8,18 +10,21 @@ const GUESTS = [
     title: 'Founder, Honnold Foundation & Free Solo Climbing Champion  |  Podcast Guest',
     img: CDN + 'IIl8pzkM6zRPyl8nCy02wDefThY.png',
     pos: 'center top',
+    clip: ASSET + 'hcMBp4dGeakXGI4OOR3szJaYM.mp4',
   },
   {
     name: 'Sabrina Pourmand Stuntz',
     title: 'Philanthropy Leader  |  Podcast Guest',
     img: CDN + 'WrUCV2JRqHcjNV29lm9ukBdSoQ.jpg',
     pos: 'center 15%',
+    clip: ASSET + 'Owne7rdXAZ9XTASWtFDO523OGBs.mp4',
   },
   {
     name: 'Duncan Arne',
     title: 'Founder, Chicago CRED | Former US Secretary of Education  |  Podcast Guest',
     img: CDN + 'XrJCWu3ZPf9xOkFSryGKKoEQ.jpg',
     pos: 'center top',
+    clip: ASSET + 'OyPml8RIupXGzrz29GPbdCEUF0.mp4',
   },
 ]
 
@@ -68,24 +73,51 @@ const EPISODES = [
   },
 ]
 
+function GuestCard({ g }) {
+  const videoRef = useRef(null)
+
+  const onEnter = () => {
+    if (videoRef.current) videoRef.current.play()
+  }
+  const onLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause()
+      videoRef.current.currentTime = 0
+    }
+  }
+
+  return (
+    <div className="pc-guest" onMouseEnter={onEnter} onMouseLeave={onLeave}>
+      <img
+        className="pc-guest__img"
+        src={g.img}
+        alt={g.name}
+        style={{ objectPosition: g.pos }}
+      />
+      {g.clip && (
+        <video
+          ref={videoRef}
+          className="pc-guest__video"
+          src={g.clip}
+          muted
+          loop
+          playsInline
+          preload="none"
+        />
+      )}
+      <div className="pc-guest__overlay" />
+      <div className="pc-guest__info">
+        <span className="pc-guest__name">{g.name}</span>
+        <span className="pc-guest__title">{g.title}</span>
+      </div>
+    </div>
+  )
+}
+
 function GuestCards() {
   return (
     <section className="pc-guests">
-      {GUESTS.map((g) => (
-        <div key={g.name} className="pc-guest">
-          <img
-            className="pc-guest__img"
-            src={g.img}
-            alt={g.name}
-            style={{ objectPosition: g.pos }}
-          />
-          <div className="pc-guest__overlay" />
-          <div className="pc-guest__info">
-            <span className="pc-guest__name">{g.name}</span>
-            <span className="pc-guest__title">{g.title}</span>
-          </div>
-        </div>
-      ))}
+      {GUESTS.map((g) => <GuestCard key={g.name} g={g} />)}
     </section>
   )
 }

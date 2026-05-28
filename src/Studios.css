@@ -541,13 +541,11 @@
   font-weight: 600;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: rgba(255,244,226,0.35);
-  transition: color 0.15s;
+  color: #fff4e2;
+  transition: opacity 0.15s;
 }
 
-.wws-footer__links a:hover {
-  color: rgba(255,244,226,0.7);
-}
+.wws-footer__links a:hover { opacity: 0.6; }
 
 .wws-footer__socials {
   display: flex;
@@ -557,14 +555,12 @@
 }
 
 .wws-footer__socials a {
-  color: rgba(255,244,226,0.35);
-  transition: color 0.15s;
+  color: #fff4e2;
+  transition: opacity 0.15s;
   display: flex;
 }
 
-.wws-footer__socials a:hover {
-  color: rgba(255,244,226,0.8);
-}
+.wws-footer__socials a:hover { opacity: 0.6; }
 
 /* ── Breakpoints ──────────────────────────────────────────────── */
 
