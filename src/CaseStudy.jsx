@@ -12,14 +12,14 @@ function SideStrips() {
       <div className="strip strip--left" aria-hidden="true">
         <span className="strip__mark">X</span>
         <span className="strip__num">00</span>
-        <span className="strip__text">WORLD WITHIN</span>
+        <span className="strip__text">WORLD WITHIN STUDIOS</span>
         <span className="strip__mark">XA</span>
         <span className="strip__mark strip__mark--bot">X</span>
       </div>
       <div className="strip strip--right" aria-hidden="true">
         <span className="strip__mark">X</span>
         <span className="strip__num">00</span>
-        <span className="strip__text">WORLD WITHIN</span>
+        <span className="strip__text">WORLD WITHIN STUDIOS</span>
         <span className="strip__mark">XA</span>
         <span className="strip__mark strip__mark--bot">X</span>
       </div>

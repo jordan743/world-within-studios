@@ -69,11 +69,13 @@
 }
 
 .wws-nav__link {
-  font-family: var(--font-b);
-  font-size: 11px;
+  font-family: var(--font-d);
+  font-size: 16px;
   font-weight: 600;
-  letter-spacing: 0.18em;
+  letter-spacing: -0.5px;
   text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 1;
   color: rgba(255,244,226,0.7);
   transition: color 0.2s;
 }
@@ -132,7 +134,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 56px;
+  gap: 80px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease;
@@ -160,7 +162,7 @@
 .wws-menu__close:hover { color: #fff4e2; }
 
 .wws-menu__logo img {
-  height: 28px;
+  height: 48px;
   width: auto;
   opacity: 0.9;
 }
@@ -169,20 +171,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 72px;
 }
 
 .wws-menu__link {
-  font-family: var(--font-b);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-family: var(--font-d);
+  font-size: clamp(52px, 16vw, 96px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
   text-transform: uppercase;
-  color: rgba(255,244,226,0.65);
-  transition: color 0.2s;
+  color: #fff4e2;
+  transition: opacity 0.2s;
+  text-align: center;
 }
 
-.wws-menu__link:hover { color: #fff4e2; }
+.wws-menu__link:hover { opacity: 0.6; }
+
 
 /* ── Scrolling Ticker ─────────────────────────────────────────── */
 
@@ -201,7 +206,7 @@
 .ticker__track {
   display: flex;
   width: max-content;
-  animation: ticker 22s linear infinite;
+  animation: ticker 40s linear infinite;
 }
 
 .ticker__track span {
@@ -318,7 +323,7 @@
 .proj-section__left {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 48px;
 }
 
 .proj-section__title-link {
@@ -444,7 +449,7 @@
   margin-bottom: 38px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 48px;
 }
 
 /* ── Stay In Touch ────────────────────────────────────────────── */
@@ -594,14 +599,17 @@
   .wws-footer { padding: 24px 32px; }
 }
 
-/* Hamburger nav kicks in at tablet/mobile */
-@media (max-width: 640px) {
+/* Hamburger nav kicks in at tablet and below */
+@media (max-width: 900px) {
   .wws-nav__link--desktop { display: none; }
   .wws-nav__burger { display: flex; }
+  .wws-nav { justify-content: flex-end; }
+}
+
+@media (max-width: 640px) {
   .wws-nav {
     padding: 0 20px;
     height: 64px;
-    justify-content: flex-end;
   }
 }
 

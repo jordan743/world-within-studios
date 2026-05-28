@@ -18,8 +18,8 @@ export default function Nav() {
           rel="noopener noreferrer"
           className="wws-nav__link wws-nav__link--desktop"
         >
-          CHECK OUT WORLD WITHIN
-        </a>
+          CHECK OUT WORLD WITHIN ↗
+</a>
         <Link to="/" className="wws-nav__logo" aria-label="World Within Studios">
           <img src="/assets/logo-studios.svg" alt="World Within Studios" />
         </Link>
