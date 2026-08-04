@@ -21,7 +21,15 @@ export default function PageHero({
           {dots ? (
             <div className="r2phero__dots" aria-hidden="true">
               {[0, 1, 2, 3, 4].map((i) => (
-                <img key={i} src="/assets/r2/pages/pink-dot.webp" alt="" className={`r2phero__dot r2phero__dot--${i}`} />
+                <img
+                  key={i}
+                  src="/assets/r2/pages/pink-dot.webp"
+                  alt=""
+                  className={`r2phero__dot r2phero__dot--${i}`}
+                  /* Drives the stagger — each dot stamps down in turn on load,
+                     then holds. See PageHero.css. */
+                  style={{ '--i': i }}
+                />
               ))}
             </div>
           ) : null}

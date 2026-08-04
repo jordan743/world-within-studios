@@ -54,10 +54,25 @@
   z-index: 3;
   pointer-events: none;
 }
+/* Each dot stamps down in turn on load, then holds — `forwards` leaves them
+   in the final state so the section is static once the sequence finishes. */
 .r2phero__dot {
   position: absolute;
   width: clamp(56px, 10.4%, 150px);
   height: auto;
+  opacity: 0;
+  animation: r2phero-dot-land 0.44s var(--r2-ease) forwards;
+  animation-delay: calc(var(--i, 0) * 0.15s + 0.3s);
+}
+
+@keyframes r2phero-dot-land {
+  from { opacity: 0; scale: 0.4; }
+  60%  { opacity: 1; scale: 1.06; }
+  to   { opacity: 1; scale: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .r2phero__dot { opacity: 1; animation: none; }
 }
 /* Positions traced from Figma nodes 2429:2388 … 2429:2393 */
 .r2phero__dot--0 { left: -7%;  top: 52%; }
