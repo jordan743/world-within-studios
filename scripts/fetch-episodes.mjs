@@ -65,6 +65,25 @@ const blurbOf = (desc) => {
   return ''
 }
 
+/**
+ * The RSS feed doesn't mark Shorts, but the /shorts/ URL tells us: YouTube
+ * serves a Short there with a 200 and redirects (303) anything else to
+ * /watch. On a network failure we keep the video — wrongly dropping a real
+ * episode is worse than letting a Short slip through.
+ */
+const isShort = async (id) => {
+  try {
+    const res = await fetch(`https://www.youtube.com/shorts/${id}`, {
+      method: 'HEAD',
+      redirect: 'manual',
+      headers: { 'user-agent': 'Mozilla/5.0 (compatible; wws-site-build)' },
+    })
+    return res.status === 200
+  } catch {
+    return false
+  }
+}
+
 const main = async () => {
   const res = await fetch(FEED, { headers: { 'user-agent': 'wws-site-build' } })
   if (!res.ok) throw new Error(`Feed returned ${res.status} ${res.statusText}`)
@@ -89,12 +108,17 @@ const main = async () => {
     }
   })
 
+  const shorts = await Promise.all(episodes.map((e) => isShort(e.id)))
+  const kept = episodes.filter((_, i) => !shorts[i])
+  const dropped = episodes.filter((_, i) => shorts[i])
+  for (const s of dropped) console.log(`  skipped Short: ${s.title}`)
+
   mkdirSync(dirname(OUT), { recursive: true })
   writeFileSync(
     OUT,
-    `${JSON.stringify({ fetchedAt: new Date().toISOString(), channel: CHANNEL_ID, episodes }, null, 2)}\n`,
+    `${JSON.stringify({ fetchedAt: new Date().toISOString(), channel: CHANNEL_ID, episodes: kept }, null, 2)}\n`,
   )
-  console.log(`Wrote ${episodes.length} episodes to ${OUT}`)
+  console.log(`Wrote ${kept.length} episodes to ${OUT} (${dropped.length} Shorts filtered out)`)
 }
 
 main().catch((err) => {
