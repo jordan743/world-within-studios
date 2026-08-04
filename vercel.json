@@ -8,15 +8,23 @@
   ],
   "headers": [
     {
-      "source": "/assets/(.*)",
+      "comment": "Vite fingerprints these, so the filename changes whenever the content does — safe to pin forever.",
+      "source": "/assets/((?!r2/).*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     },
     {
+      "comment": "Static art under /assets/r2 keeps stable filenames, so it MUST stay revalidatable — marking it immutable strands old images in browsers for a year.",
+      "source": "/assets/r2/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
       "source": "/fonts/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        { "key": "Cache-Control", "value": "public, max-age=604800" }
       ]
     }
   ]
