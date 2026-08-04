@@ -1,0 +1,47 @@
+/* Black marquee strip — Figma "ticker" (1684×37, black, 58px gap) */
+
+.r2ticker {
+  position: relative;
+  z-index: 2;
+  background: var(--r2-ink);
+  height: 37px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.r2ticker__track {
+  display: flex;
+  width: max-content;
+  animation: r2ticker-scroll 46s linear infinite;
+}
+
+.r2ticker__run {
+  display: flex;
+  align-items: center;
+  gap: 58px;
+  padding-right: 58px;
+  flex: none;
+}
+
+.r2ticker__word {
+  height: 15px;
+  width: auto;
+  flex: none;
+  display: block;
+}
+
+@keyframes r2ticker-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (max-width: 600px) {
+  .r2ticker { height: 30px; }
+  .r2ticker__word { height: 12px; }
+  .r2ticker__run { gap: 40px; padding-right: 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .r2ticker__track { animation: none; }
+}

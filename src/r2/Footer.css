@@ -1,0 +1,113 @@
+/* ==========================================================================
+   R2 Footer — Figma component 2425:1199 (1440×933)
+   playbill lockup (0–523) · film-set strip (523–861) · legal bar (861–933)
+   ========================================================================== */
+
+.r2footer {
+  position: relative;
+  z-index: 2;
+  background: var(--r2-cream);
+  color: var(--r2-playbill);
+  overflow: hidden;
+}
+
+/* --- Playbill lockup ------------------------------------------------------ */
+.r2footer__playbill {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1440 / 523;
+  overflow: hidden;
+  background: var(--r2-cream);
+}
+
+/* Natural lockup is 1472×577 sitting at x=-11 in a 1440-wide clip. */
+.r2footer__lockup {
+  position: absolute;
+  top: 0;
+  left: -0.76%;
+  width: 102.22%;
+  height: auto;
+  max-width: none;
+  display: block;
+}
+
+/* Keep the paper texture readable without greying the cream down. */
+.r2footer__playbill .r2-grain { opacity: 0.12; mix-blend-mode: multiply; }
+
+/* --- Film-set strip ------------------------------------------------------- */
+.r2footer__strip {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1440 / 338;
+  overflow: hidden;
+  margin-top: -1px; /* seal the seam against the playbill */
+}
+.r2footer__strip img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 42%;
+  display: block;
+}
+
+/* --- Legal / social bar --------------------------------------------------- */
+.r2footer__bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: calc(var(--r2-max) + var(--r2-gutter) * 2);
+  margin: 0 auto;
+  padding: 26px var(--r2-gutter);
+  min-height: 72px;
+}
+
+.r2footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 34px;
+}
+.r2footer__legal a {
+  font-family: var(--r2-body);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--r2-playbill);
+  transition: opacity 0.2s var(--r2-ease);
+}
+.r2footer__legal a:hover { opacity: 0.55; }
+
+.r2footer__socials {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  list-style: none;
+}
+.r2footer__socials a {
+  display: block;
+  color: var(--r2-playbill);
+  transition: opacity 0.2s var(--r2-ease);
+}
+.r2footer__socials a:hover { opacity: 0.55; }
+.r2footer__socials svg {
+  width: 22px;
+  height: 22px;
+  display: block;
+}
+
+@media (max-width: 700px) {
+  .r2footer__bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 22px;
+    padding-block: 24px 32px;
+  }
+  .r2footer__legal { gap: 16px 22px; }
+  .r2footer__legal a { font-size: 9.5px; }
+  .r2footer__socials { gap: 20px; }
+}

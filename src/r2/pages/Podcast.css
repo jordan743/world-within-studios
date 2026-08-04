@@ -1,0 +1,231 @@
+/* ==========================================================================
+   Podcast — Figma 2356:733 · List View 2430:5634
+   ========================================================================== */
+
+.r2-sr {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%);
+  white-space: nowrap; border: 0;
+}
+
+/* --- Hero ----------------------------------------------------------------- */
+.r2pod__hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1440 / 660;
+  overflow: hidden;
+  background: var(--r2-green);
+}
+.r2pod__hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* The show's title card sits left of centre — bias the crop toward it so it
+     survives the narrower aspect ratios below. */
+  object-position: 34% center;
+  display: block;
+}
+
+/* --- Meta block ----------------------------------------------------------- */
+.r2pod__meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: 64px;
+  align-items: start;
+  padding-block: 64px 24px;
+}
+
+.r2pod__title {
+  font-family: var(--r2-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.96;
+  font-size: clamp(30px, 4.2vw, 54px);
+  color: var(--r2-cream);
+  margin: 0 0 24px;
+}
+.r2pod__title span { display: block; }
+.r2pod__title em {
+  display: block;
+  font-style: normal;
+  color: var(--r2-cream-40);
+}
+
+.r2pod__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 56px;
+  margin: 34px 0 0;
+}
+.r2pod__facts dt { margin-bottom: 6px; }
+.r2pod__facts dd {
+  margin: 0;
+  font-size: 14px;
+  color: var(--r2-cream);
+}
+
+.r2pod__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 34px;
+  list-style: none;
+  margin: 32px 0 0;
+}
+.r2pod__links a {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--r2-green);
+  transition: opacity 0.2s var(--r2-ease);
+}
+.r2pod__links a:hover { opacity: 0.7; }
+
+.r2pod__art {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: var(--r2-black);
+}
+.r2pod__art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* --- Episodes ------------------------------------------------------------- */
+.r2pod__episodes { padding-block: 40px 76px; }
+
+.r2pod__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.r2pod__chip {
+  display: inline-block;
+  font-family: var(--r2-display);
+  font-weight: 800;
+  font-size: clamp(16px, 1.8vw, 24px);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--r2-ink);
+  background: var(--r2-cream);
+  padding: 9px 22px;
+  border-radius: 2px;
+}
+
+.r2pod__views { display: flex; gap: 14px; }
+.r2pod__views button {
+  width: 26px;
+  height: 26px;
+  color: var(--r2-cream-40);
+  transition: color 0.2s var(--r2-ease);
+  display: grid;
+  place-items: center;
+}
+.r2pod__views button svg { width: 20px; height: 20px; }
+.r2pod__views button:hover { color: var(--r2-cream-70); }
+.r2pod__views button.is-active { color: var(--r2-cream); }
+
+/* Grid view */
+.r2pod__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.r2pod__card {
+  display: block;
+  aspect-ratio: 431 / 242;
+  overflow: hidden;
+  background: var(--r2-black);
+}
+.r2pod__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s var(--r2-ease);
+}
+.r2pod__card:hover img { transform: scale(1.04); }
+
+/* List view */
+.r2pod__list-head { margin-bottom: 18px; }
+.r2pod__list ul { list-style: none; }
+.r2pod__list li {
+  display: grid;
+  grid-template-columns: 106px 250px minmax(0, 1fr) 118px;
+  gap: 24px;
+  align-items: baseline;
+  padding: 16px 0;
+  border-top: 1px solid var(--r2-cream-12);
+}
+.r2pod__list li:last-child { border-bottom: 1px solid var(--r2-cream-12); }
+
+.r2pod__ep {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  color: var(--r2-cream-40);
+}
+.r2pod__guest {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--r2-cream);
+}
+.r2pod__blurb {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--r2-cream-55);
+}
+.r2pod__watch {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  color: var(--r2-green);
+  justify-self: end;
+  white-space: nowrap;
+  transition: opacity 0.2s var(--r2-ease);
+}
+.r2pod__watch:hover { opacity: 0.7; }
+
+/* --- Responsive ----------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .r2pod__meta { grid-template-columns: minmax(0, 1fr) 300px; gap: 44px; }
+  .r2pod__list li { grid-template-columns: 92px 200px minmax(0, 1fr) 108px; gap: 18px; }
+}
+
+@media (max-width: 860px) {
+  .r2pod__hero { aspect-ratio: 4 / 3; }
+  .r2pod__meta {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding-block: 44px 16px;
+  }
+  .r2pod__art { max-width: 320px; }
+  .r2pod__grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Episode rows reflow to a stacked card */
+  .r2pod__list li {
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'ep    watch'
+      'guest guest'
+      'blurb blurb';
+    gap: 8px 16px;
+    padding: 18px 0;
+  }
+  .r2pod__ep { grid-area: ep; }
+  .r2pod__watch { grid-area: watch; }
+  .r2pod__guest { grid-area: guest; }
+  .r2pod__blurb { grid-area: blurb; }
+}
+
+@media (max-width: 560px) {
+  .r2pod__hero { aspect-ratio: 5 / 4; }
+  .r2pod__grid { grid-template-columns: 1fr; }
+  .r2pod__facts { gap: 14px 32px; }
+  .r2pod__episodes { padding-block: 32px 56px; }
+}

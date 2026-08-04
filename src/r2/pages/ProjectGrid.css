@@ -1,0 +1,24 @@
+/* Shared 4-up project grid — Figma 2429:2394 (1312 wide, 321 cards, 9px gutter) */
+
+.r2grid-section {
+  padding-block: 56px 72px;
+}
+
+.r2grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 42px 9px;
+}
+
+@media (max-width: 1024px) {
+  .r2grid { grid-template-columns: repeat(3, 1fr); gap: 36px 9px; }
+}
+
+@media (max-width: 760px) {
+  .r2grid-section { padding-block: 40px 52px; }
+  .r2grid { grid-template-columns: repeat(2, 1fr); gap: 28px 9px; }
+}
+
+@media (max-width: 420px) {
+  .r2grid { gap: 26px 8px; }
+}

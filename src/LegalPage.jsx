@@ -1,5 +1,5 @@
-import Nav from './Nav.jsx'
-import Footer from './Footer.jsx'
+import Nav from './r2/Nav.jsx'
+import Footer from './r2/Footer.jsx'
 import './Studios.css'
 import './LegalPage.css'
 

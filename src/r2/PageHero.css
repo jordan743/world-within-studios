@@ -1,0 +1,87 @@
+/* ==========================================================================
+   Inner-page hero — Figma "hero-left" (Film/TV 2356:703, 1440×850)
+   ========================================================================== */
+
+.r2phero {
+  position: relative;
+  padding-top: 150px;
+}
+.r2phero.is-compact { padding-top: 132px; }
+
+.r2phero__banner {
+  position: relative;
+  width: 100%;
+  max-width: calc(var(--r2-max) + var(--r2-gutter) * 2);
+  margin: 0 auto;
+  padding-inline: var(--r2-gutter);
+  aspect-ratio: 1312 / 500;
+  overflow: visible;
+  isolation: isolate;
+}
+
+/* Flat colour field the halftone multiplies into. */
+.r2phero__banner::before {
+  content: '';
+  position: absolute;
+  inset: 0 var(--r2-gutter);
+  z-index: 0;
+}
+.r2phero__banner--yellow::before { background: var(--r2-yellow); }
+.r2phero__banner--green::before  { background: var(--r2-green); }
+.r2phero__banner--cream::before  { background: var(--r2-cream); }
+
+.r2phero__banner > img {
+  position: absolute;
+  inset: 0 var(--r2-gutter);
+  width: calc(100% - var(--r2-gutter) * 2);
+  height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+  mix-blend-mode: multiply;
+  z-index: 1;
+}
+
+.r2phero__banner .r2-grain {
+  inset: 0 var(--r2-gutter);
+  z-index: 2;
+  opacity: 0.4;
+}
+
+/* --- Magenta dots --------------------------------------------------------- */
+.r2phero__dots {
+  position: absolute;
+  inset: 0 var(--r2-gutter);
+  z-index: 3;
+  pointer-events: none;
+}
+.r2phero__dot {
+  position: absolute;
+  width: clamp(56px, 10.4%, 150px);
+  height: auto;
+}
+/* Positions traced from Figma nodes 2429:2388 … 2429:2393 */
+.r2phero__dot--0 { left: -7%;  top: 52%; }
+.r2phero__dot--1 { left: 46%;  top: -12%; }
+.r2phero__dot--2 { left: 98%;  top: 70%; }
+.r2phero__dot--3 { left: 46.5%; top: 60%; }
+.r2phero__dot--4 { left: 90%;  top: 58%; }
+
+/* --- Title ---------------------------------------------------------------- */
+.r2phero__title {
+  margin: 34px 0 0;
+}
+
+@media (max-width: 900px) {
+  .r2phero { padding-top: 110px; }
+  .r2phero.is-compact { padding-top: 100px; }
+  .r2phero__banner { aspect-ratio: 4 / 3; }
+  .r2phero__title { margin-top: 26px; }
+}
+
+@media (max-width: 600px) {
+  .r2phero { padding-top: 92px; }
+  .r2phero.is-compact { padding-top: 86px; }
+  .r2phero__banner { aspect-ratio: 1 / 1; }
+  .r2phero__dot { width: clamp(44px, 16%, 90px); }
+  .r2phero__title { margin-top: 20px; }
+}

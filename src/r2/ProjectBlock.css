@@ -1,0 +1,123 @@
+/* ==========================================================================
+   Home stack entry — Figma "02 — How to Change the World" (1440×750)
+   media 1440×512, then a 238px split caption bar
+   ========================================================================== */
+
+.r2block {
+  position: relative;
+  display: block;
+  background: var(--r2-ink);
+  color: inherit;
+}
+
+.r2block__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1440 / 512;
+  overflow: hidden;
+  background: var(--r2-black);
+}
+.r2block__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.9s var(--r2-ease);
+}
+.r2block:hover .r2block__media img { transform: scale(1.03); }
+
+.r2block__badges {
+  position: absolute;
+  left: var(--r2-gutter);
+  bottom: 28px;
+  display: flex;
+  align-items: flex-end;
+  gap: 18px;
+}
+.r2block__badges img {
+  height: clamp(46px, 5.4vw, 78px);
+  width: auto;
+  object-fit: contain;
+}
+
+/* --- Caption bar ---------------------------------------------------------- */
+.r2block__bar {
+  display: flex;
+  align-items: stretch;
+  min-height: 238px;
+}
+
+/* Figma sets ~107px caps at 1440 (7.43vw) — sizing it any larger pushes the
+   cream panel wide enough that "DOCUMENTARY" no longer fits beside it. */
+.r2block__title,
+.r2block__cat {
+  font-family: var(--r2-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+  font-size: clamp(26px, 7.43vw, 107px);
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 0.7% 16px;
+}
+
+.r2block__title {
+  flex: 0 1 auto;
+  background: var(--r2-cream);
+  color: var(--r2-ink);
+  padding-left: 1%;
+  white-space: nowrap;
+}
+.r2block__title span { display: block; }
+
+/* The title panel hugs its text, so how much room is left for the category
+   changes per project. Make the panel a query container and size the category
+   from its own width, capped at the title's size — that way "DOCUMENTARY"
+   always fits instead of running under the edge. */
+.r2block__cat {
+  flex: 1 1 0;
+  min-width: 0;
+  background: var(--r2-ink);
+  color: var(--r2-cream-70);
+  padding-left: 1%;
+  padding-right: 1%;
+  container-type: inline-size;
+  /* Wrap between words only — breaking inside "DOCUMENTARY" reads as a bug. */
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+.r2block__cat > span {
+  display: block;
+  font-size: min(7.43vw, 107px, 14.4cqw);
+}
+
+@media (max-width: 900px) {
+  .r2block__bar { min-height: 0; }
+  .r2block__title,
+  .r2block__cat {
+    font-size: clamp(24px, 7.6vw, 72px);
+    padding-block: 14px 18px;
+  }
+}
+
+/* Below this the two-panel split stops being readable — stack them. */
+@media (max-width: 640px) {
+  .r2block__media { aspect-ratio: 16 / 10; }
+  .r2block__bar { flex-direction: column; }
+  .r2block__title,
+  .r2block__cat {
+    font-size: clamp(26px, 9.2vw, 44px);
+    white-space: normal;
+    padding: 14px var(--r2-gutter) 16px;
+  }
+  .r2block__cat {
+    font-size: clamp(15px, 4.4vw, 22px);
+    letter-spacing: 0.01em;
+    padding-block: 12px 18px;
+  }
+  .r2block__badges { left: var(--r2-gutter); bottom: 16px; gap: 12px; }
+}

@@ -1,0 +1,33 @@
+/* Retro intro — Figma 2420:12 */
+
+.r2loading {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--r2-black);
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.5s var(--r2-ease);
+}
+.r2loading.is-leaving { opacity: 0; }
+
+.r2loading__wall {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  animation: r2loading-in 0.9s var(--r2-ease) both;
+}
+
+@keyframes r2loading-in {
+  from { opacity: 0; transform: scale(1.04); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Portrait phones: the wall is a 16:9 landscape composition, so bias the crop
+   toward the centred logo card rather than letting the sides win. */
+@media (max-aspect-ratio: 3 / 4) {
+  .r2loading__wall { object-position: 50% 50%; transform-origin: center; }
+}

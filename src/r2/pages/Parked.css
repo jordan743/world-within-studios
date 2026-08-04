@@ -1,0 +1,14 @@
+.r2parked {
+  padding-block: 150px 88px;
+}
+
+.r2parked__blurb {
+  margin-top: 28px;
+}
+
+@media (max-width: 760px) {
+  .r2parked { padding-block: 110px 64px; }
+}
+@media (max-width: 460px) {
+  .r2parked { padding-block: 92px 56px; }
+}

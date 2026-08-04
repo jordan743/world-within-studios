@@ -1,0 +1,117 @@
+/* ==========================================================================
+   World Within Studios — R2 design tokens
+   Sourced from Figma "🎬WEBSITE WWS🎬 / ↳ R2v1 ✅" (file 4xMwKLiMwxKPOxLDvPwykA)
+   ========================================================================== */
+
+:root {
+  /* Core palette */
+  --r2-black: #0d0d0b;          /* page background (hero frame fill) */
+  --r2-ink: #000;               /* pure black bars / type on cream */
+  --r2-cream: #fff4e2;          /* WORLD WITHIN / Primary / Soft Off-White */
+  --r2-green: #1aca6f;          /* logo + MENU + headline plate */
+  --r2-pink: #ff3fb4;           /* magenta dots */
+  --r2-yellow: #f5e04b;         /* film/tv hero + CTA band */
+  --r2-red: #f5333f;            /* contact submit button */
+  --r2-playbill: #1c1c1c;       /* footer lockup ink */
+
+  /* Cream tints */
+  --r2-cream-70: rgba(255, 244, 226, 0.7);
+  --r2-cream-55: rgba(255, 244, 226, 0.55);
+  --r2-cream-40: rgba(255, 244, 226, 0.4);
+  --r2-cream-20: rgba(255, 244, 226, 0.2);
+  --r2-cream-12: rgba(255, 244, 226, 0.12);
+
+  /* Layout — Figma artboard is 1440 with a 64px gutter (1312 content) */
+  --r2-max: 1312px;
+  --r2-gutter: 64px;
+
+  /* Type */
+  --r2-display: 'Switzer', -apple-system, BlinkMacSystemFont, sans-serif;
+  --r2-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+  /* Motion */
+  --r2-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (max-width: 900px) {
+  :root { --r2-gutter: 32px; }
+}
+@media (max-width: 600px) {
+  :root { --r2-gutter: 20px; }
+}
+
+/* --------------------------------------------------------------------------
+   Shared primitives
+   -------------------------------------------------------------------------- */
+
+.r2-page {
+  background: var(--r2-black);
+  color: var(--r2-cream);
+  font-family: var(--r2-body);
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+.r2-wrap {
+  width: 100%;
+  max-width: calc(var(--r2-max) + var(--r2-gutter) * 2);
+  margin: 0 auto;
+  padding-inline: var(--r2-gutter);
+}
+
+/* Big Switzer display heading — e.g. "FILM & TELEVISION", "AWARDS / PRESS" */
+.r2-display {
+  font-family: var(--r2-display);
+  font-weight: 800;
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  color: var(--r2-cream);
+  /* 1312px wide headline in Figma renders ~109px cap height */
+  font-size: clamp(40px, 8.9vw, 118px);
+}
+
+/* Small all-caps label, e.g. "FORMAT", "EPISODE GUIDE" */
+.r2-label {
+  font-family: var(--r2-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--r2-cream-55);
+}
+
+.r2-body-copy {
+  font-size: clamp(15px, 1.25vw, 17px);
+  line-height: 1.55;
+  color: var(--r2-cream-70);
+  max-width: 60ch;
+}
+
+/* Paper-grain overlay used across hero blocks */
+.r2-grain {
+  position: absolute;
+  inset: -10%;
+  background-image: url('/assets/r2/texture-grain.webp');
+  background-size: 900px auto;
+  background-repeat: repeat;
+  mix-blend-mode: lighten;
+  opacity: 0.84;
+  pointer-events: none;
+}
+
+/* Focus ring */
+.r2-page :focus-visible {
+  outline: 2px solid var(--r2-green);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .r2-page *,
+  .r2-page *::before,
+  .r2-page *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

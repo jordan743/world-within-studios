@@ -1,0 +1,170 @@
+/* ==========================================================================
+   Case study — Figma 2330:1497 (1440×3087)
+   ========================================================================== */
+
+.r2cs__hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1440 / 750;
+  max-height: 84svh;
+  overflow: hidden;
+  background: var(--r2-black);
+}
+.r2cs__hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 32%;
+  display: block;
+}
+
+/* --- Intro ---------------------------------------------------------------- */
+.r2cs__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 345px;
+  gap: 64px;
+  align-items: start;
+  padding-block: 64px 72px;
+}
+
+.r2cs__title {
+  font-family: var(--r2-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.96;
+  font-size: clamp(30px, 4.2vw, 56px);
+  color: var(--r2-cream);
+  margin: 0;
+}
+
+.r2cs__cat {
+  font-family: var(--r2-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  font-size: clamp(24px, 3.4vw, 46px);
+  color: var(--r2-cream-40);
+  margin: 6px 0 0;
+}
+
+.r2cs__desc { margin-top: 26px; }
+
+.r2cs__facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 56px;
+  margin: 34px 0 0;
+}
+.r2cs__facts dt { margin-bottom: 6px; }
+.r2cs__facts dd { margin: 0; font-size: 14px; color: var(--r2-cream); }
+
+.r2cs__trailer-link { margin-top: 30px; }
+.r2cs__trailer-link a {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--r2-green);
+  transition: opacity 0.2s var(--r2-ease);
+}
+.r2cs__trailer-link a:hover { opacity: 0.7; }
+
+.r2cs__poster {
+  width: 100%;
+  overflow: hidden;
+  background: var(--r2-black);
+}
+.r2cs__poster img { width: 100%; height: auto; display: block; }
+
+/* --- More projects rail --------------------------------------------------- */
+.r2cs__more { padding-block: 8px 76px; }
+
+.r2cs__chip {
+  display: inline-block;
+  font-family: var(--r2-display);
+  font-weight: 800;
+  font-size: clamp(16px, 1.8vw, 24px);
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--r2-ink);
+  background: var(--r2-cream);
+  padding: 9px 22px;
+  border-radius: 2px;
+  margin-bottom: 28px;
+}
+
+.r2cs__rail {
+  display: flex;
+  gap: 9px;
+  list-style: none;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--r2-cream-20) transparent;
+}
+.r2cs__rail > li {
+  flex: 0 0 auto;
+  width: 254px;
+  scroll-snap-align: start;
+}
+
+.r2cs__rail-card {
+  position: relative;
+  display: block;
+  aspect-ratio: 321 / 475;
+  overflow: hidden;
+  background: var(--r2-black);
+  color: var(--r2-cream);
+}
+.r2cs__rail-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--r2-ease);
+}
+.r2cs__rail-card:hover img { transform: scale(1.04); }
+
+.r2cs__rail-meta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 40px 16px 16px;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.82));
+}
+.r2cs__rail-cat {
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--r2-cream-55);
+}
+.r2cs__rail-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+
+@media (max-width: 900px) {
+  .r2cs__intro {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding-block: 44px 52px;
+  }
+  .r2cs__poster { max-width: 280px; }
+}
+
+@media (max-width: 600px) {
+  .r2cs__hero { aspect-ratio: 4 / 3; }
+  .r2cs__rail > li { width: 200px; }
+  .r2cs__more { padding-bottom: 56px; }
+}

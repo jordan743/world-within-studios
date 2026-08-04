@@ -1,0 +1,211 @@
+/* ==========================================================================
+   R2 Nav + full-screen MENU overlay
+   Figma: component set 2430:3325 (Default / off-white / BLACK)
+   ========================================================================== */
+
+.r2nav {
+  position: absolute;
+  top: 36px;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  max-width: calc(var(--r2-max) + var(--r2-gutter) * 2);
+  margin: 0 auto;
+  padding-inline: var(--r2-gutter);
+  pointer-events: none;
+}
+
+.r2nav > * { pointer-events: auto; }
+
+/* Tone variants — the logo SVG and MENU both inherit `color`. */
+.r2nav--green { color: var(--r2-green); }
+.r2nav--cream { color: var(--r2-cream); }
+.r2nav--ink   { color: var(--r2-ink); }
+
+.r2nav__logo {
+  display: block;
+  width: 178px;
+  flex: none;
+  color: inherit;
+}
+
+/* An <img> can't inherit currentColor from the page, so paint the wordmark as
+   a mask instead — that lets the three Figma tone variants drive it. */
+.r2logo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 178.298 / 51.5168;
+  background-color: currentColor;
+  -webkit-mask: url('/assets/r2/logo-wws-currentcolor.svg') no-repeat center / contain;
+  mask: url('/assets/r2/logo-wws-currentcolor.svg') no-repeat center / contain;
+}
+
+.r2nav__menu-btn {
+  font-family: var(--r2-display);
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: inherit;
+  padding: 0;
+  transition: opacity 0.2s var(--r2-ease);
+}
+.r2nav__menu-btn:hover { opacity: 0.7; }
+
+@media (max-width: 900px) {
+  .r2nav { top: 22px; }
+  .r2nav__logo { width: 124px; }
+  .r2nav__menu-btn { font-size: 40px; }
+}
+@media (max-width: 600px) {
+  .r2nav { top: 18px; }
+  .r2nav__logo { width: 104px; }
+  .r2nav__menu-btn { font-size: 32px; }
+}
+
+/* --------------------------------------------------------------------------
+   Overlay
+   -------------------------------------------------------------------------- */
+
+.r2menu {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  background: var(--r2-black);
+  color: var(--r2-cream);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s var(--r2-ease), visibility 0.35s;
+}
+.r2menu.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Paper grain to match the rest of the site */
+.r2menu::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/r2/texture-grain.webp');
+  background-size: 900px auto;
+  mix-blend-mode: lighten;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.r2menu__bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  max-width: calc(var(--r2-max) + var(--r2-gutter) * 2);
+  margin: 0 auto;
+  padding: 36px var(--r2-gutter) 0;
+  color: var(--r2-green);
+  flex: none;
+}
+
+.r2menu__logo { display: block; width: 178px; color: inherit; }
+
+.r2menu__close {
+  font-family: var(--r2-display);
+  font-weight: 800;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: inherit;
+  transition: opacity 0.2s var(--r2-ease);
+}
+.r2menu__close:hover { opacity: 0.7; }
+
+/* Big bold menu items */
+.r2menu__links {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(2px, 0.6vh, 10px);
+  width: 100%;
+  max-width: calc(var(--r2-max) + var(--r2-gutter) * 2);
+  margin: 0 auto;
+  padding: 4vh var(--r2-gutter);
+  min-height: 0;
+}
+
+.r2menu__link {
+  display: block;
+  font-family: var(--r2-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+  line-height: 0.94;
+  font-size: clamp(30px, 7.2vw, 104px);
+  color: var(--r2-cream);
+  transition: color 0.22s var(--r2-ease);
+  /* Stagger in when the overlay opens */
+  opacity: 0;
+  transform: translateY(24px);
+}
+.r2menu.is-open .r2menu__link {
+  animation: r2menu-in 0.5s var(--r2-ease) forwards;
+  animation-delay: calc(0.06s * var(--i) + 0.1s);
+}
+.r2menu__link:hover,
+.r2menu__link:focus-visible { color: var(--r2-green); }
+
+@keyframes r2menu-in {
+  to { opacity: 1; transform: none; }
+}
+
+.r2menu__foot {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: calc(var(--r2-max) + var(--r2-gutter) * 2);
+  margin: 0 auto;
+  padding: 0 var(--r2-gutter) 40px;
+  flex: none;
+}
+
+.r2menu__external {
+  font-family: var(--r2-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--r2-cream-55);
+  transition: color 0.2s var(--r2-ease);
+}
+.r2menu__external:hover { color: var(--r2-green); }
+
+@media (max-width: 900px) {
+  .r2menu__bar { padding-top: 22px; color: var(--r2-green); }
+  .r2menu__logo { width: 124px; }
+  .r2menu__close { font-size: 40px; }
+  .r2menu__links { gap: 6px; }
+}
+@media (max-width: 600px) {
+  .r2menu__bar { padding-top: 18px; }
+  .r2menu__logo { width: 104px; }
+  .r2menu__close { font-size: 32px; }
+  .r2menu__link { font-size: clamp(28px, 9vw, 44px); line-height: 1.02; }
+  .r2menu__foot { padding-bottom: 28px; }
+}
+
+/* Short viewports (landscape phones) — keep everything on screen */
+@media (max-height: 560px) {
+  .r2menu__links { gap: 2px; padding-block: 2vh; }
+  .r2menu__link { font-size: clamp(22px, 5.4vh, 40px); }
+}
