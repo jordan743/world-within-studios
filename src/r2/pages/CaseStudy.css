@@ -109,6 +109,7 @@
   display: block;
   aspect-ratio: 321 / 475;
   overflow: hidden;
+  border-radius: 8px;   /* matches the styled covers */
   background: var(--r2-black);
   color: var(--r2-cream);
 }

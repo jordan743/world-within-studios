@@ -10,11 +10,14 @@
   color: inherit;
 }
 
+/* 8px matches the styled cover frames in Figma. Rounding the container rather
+   than the images keeps the cover and the hover poster on the same radius. */
 .r2card__art {
   position: relative;
   width: 100%;
   aspect-ratio: 321 / 475;
   overflow: hidden;
+  border-radius: 8px;
   background: var(--r2-black);
 }
 
