@@ -14,9 +14,9 @@
   justify-content: space-between;
   gap: 24px;
   width: 100%;
-  max-width: calc(var(--r2-max) + var(--r2-gutter) * 2);
+  max-width: var(--r2-frame);
   margin: 0 auto;
-  padding-inline: var(--r2-gutter);
+  padding-inline: var(--r2-gutter-nav);
   pointer-events: none;
 }
 
@@ -109,9 +109,9 @@
   justify-content: space-between;
   gap: 24px;
   width: 100%;
-  max-width: calc(var(--r2-max) + var(--r2-gutter) * 2);
+  max-width: var(--r2-frame);
   margin: 0 auto;
-  padding: 36px var(--r2-gutter) 0;
+  padding: 36px var(--r2-gutter-nav) 0;
   color: var(--r2-green);
   flex: none;
 }
@@ -139,9 +139,9 @@
   justify-content: center;
   gap: clamp(2px, 0.6vh, 10px);
   width: 100%;
-  max-width: calc(var(--r2-max) + var(--r2-gutter) * 2);
+  max-width: var(--r2-frame);
   margin: 0 auto;
-  padding: 4vh var(--r2-gutter);
+  padding: 4vh var(--r2-gutter-nav);
   min-height: 0;
 }
 
@@ -174,9 +174,9 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: calc(var(--r2-max) + var(--r2-gutter) * 2);
+  max-width: var(--r2-frame);
   margin: 0 auto;
-  padding: 0 var(--r2-gutter) 40px;
+  padding: 0 var(--r2-gutter-nav) 40px;
   flex: none;
 }
 

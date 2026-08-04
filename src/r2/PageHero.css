@@ -11,7 +11,7 @@
 .r2phero__banner {
   position: relative;
   width: 100%;
-  max-width: calc(var(--r2-max) + var(--r2-gutter) * 2);
+  max-width: var(--r2-frame);
   margin: 0 auto;
   padding-inline: var(--r2-gutter);
   aspect-ratio: 1312 / 500;

@@ -2,12 +2,14 @@ import { Link } from 'react-router-dom'
 import './ProjectBlock.css'
 
 /**
- * Full-bleed home stack entry — Figma "02 — How to Change the World" (1440×750):
- * media on top, then a split caption bar: title in ink on cream, category in
- * cream on ink.
+ * Full-bleed home stack entry — Figma "02 — How to Change the World" (1440×750).
+ *
+ * The caption bar is the exported Figma frame rather than live text: the title
+ * and category are optically stretched to fill their panels, which no web type
+ * setting reproduces. Alt text carries the wording for screen readers and SEO.
  */
 export default function ProjectBlock({ project, eager = false }) {
-  const { slug, titleLines, category, blockBg, title, badges } = project
+  const { slug, category, blockBg, bar, title, badges } = project
 
   return (
     <Link to={`/${slug}`} className="r2block" aria-label={`${title} — ${category}`}>
@@ -28,14 +30,13 @@ export default function ProjectBlock({ project, eager = false }) {
         ) : null}
       </div>
 
-      <div className="r2block__bar">
-        <h2 className="r2block__title">
-          {titleLines.map((line) => (
-            <span key={line}>{line}</span>
-          ))}
-        </h2>
-        <p className="r2block__cat"><span>{category}</span></p>
-      </div>
+      <img
+        className="r2block__bar"
+        src={bar}
+        alt={`${title} — ${category}`}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+      />
     </Link>
   )
 }

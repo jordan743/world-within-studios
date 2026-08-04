@@ -80,17 +80,11 @@
 /* --- More projects rail --------------------------------------------------- */
 .r2cs__more { padding-block: 8px 76px; }
 
+/* Exported torn-paper label from Figma 2352:2098 */
 .r2cs__chip {
-  display: inline-block;
-  font-family: var(--r2-display);
-  font-weight: 800;
-  font-size: clamp(16px, 1.8vw, 24px);
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-  color: var(--r2-ink);
-  background: var(--r2-cream);
-  padding: 9px 22px;
-  border-radius: 2px;
+  display: block;
+  width: clamp(232px, 25.4vw, 365px);
+  height: auto;
   margin-bottom: 28px;
 }
 

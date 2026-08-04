@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Nav from '../Nav.jsx'
 import Ticker from '../Ticker.jsx'
 import Footer from '../Footer.jsx'
-import { PODCAST, PODCAST_FEATURED, PODCAST_EPISODES } from '../siteData.js'
+import { PODCAST, ALL_EPISODES } from '../siteData.js'
 import './Podcast.css'
 
 function GridIcon() {
@@ -26,7 +26,18 @@ function ListIcon() {
   )
 }
 
-/** Podcast — Figma 2356:733, with the List View from 2430:5634. */
+const swapToFallbackThumb = (ev, episode) => {
+  const img = ev.currentTarget
+  if (episode.thumbFallback && !img.src.endsWith(episode.thumbFallback)) {
+    img.src = episode.thumbFallback
+  }
+}
+
+const formatDate = (iso) =>
+  new Date(iso).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
+
+/** Podcast — Figma 2356:733, with the List View from 2430:5634.
+    Episodes come from the channel feed (see scripts/fetch-episodes.mjs). */
 export default function Podcast() {
   const [view, setView] = useState('grid')
 
@@ -74,7 +85,7 @@ export default function Podcast() {
 
         <section className="r2-wrap r2pod__episodes">
           <div className="r2pod__bar">
-            <span className="r2pod__chip">LATEST EPISODES</span>
+            <img className="r2pod__chip" src="/assets/r2/chips/latest-episodes.webp" alt="Latest episodes" />
             <div className="r2pod__views" role="group" aria-label="Episode layout">
               <button
                 type="button"
@@ -99,9 +110,21 @@ export default function Podcast() {
 
           {view === 'grid' ? (
             <div className="r2pod__grid">
-              {PODCAST_FEATURED.map((e) => (
+              {ALL_EPISODES.map((e) => (
                 <a key={e.id} href={e.href} target="_blank" rel="noopener noreferrer" className="r2pod__card">
-                  <img src={e.img} alt={`${e.title} — featuring ${e.guest}`} loading="lazy" />
+                  <img
+                    src={e.thumb}
+                    alt={e.title}
+                    loading="lazy"
+                    onError={(ev) => swapToFallbackThumb(ev, e)}
+                    /* When maxresdefault is missing YouTube answers 200 with a
+                       120x90 grey placeholder rather than a 404, so size is the
+                       only reliable tell. */
+                    onLoad={(ev) => {
+                      if (ev.currentTarget.naturalWidth < 320) swapToFallbackThumb(ev, e)
+                    }}
+                  />
+                  <span className="r2pod__card-title">{e.title}</span>
                 </a>
               ))}
             </div>
@@ -109,10 +132,21 @@ export default function Podcast() {
             <div className="r2pod__list">
               <p className="r2-label r2pod__list-head">EPISODE GUIDE</p>
               <ul>
-                {PODCAST_EPISODES.map((e) => (
-                  <li key={e.ep}>
-                    <span className="r2pod__ep">S1 EP. {e.ep}</span>
-                    <span className="r2pod__guest">{e.guest}</span>
+                {ALL_EPISODES.map((e) => (
+                  <li key={e.id}>
+                    <img
+                      className="r2pod__row-thumb"
+                      src={e.thumb}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      onError={(ev) => swapToFallbackThumb(ev, e)}
+                      onLoad={(ev) => {
+                        if (ev.currentTarget.naturalWidth < 320) swapToFallbackThumb(ev, e)
+                      }}
+                    />
+                    <span className="r2pod__ep">{formatDate(e.published)}</span>
+                    <span className="r2pod__guest">{e.title}</span>
                     <span className="r2pod__blurb">{e.blurb}</span>
                     <a href={e.href} target="_blank" rel="noopener noreferrer" className="r2pod__watch">
                       WATCH NOW <span aria-hidden="true">↗</span>

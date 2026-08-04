@@ -70,7 +70,7 @@
 
 .r2contact__submit {
   align-self: flex-start;
-  background: var(--r2-red);
+  background: var(--r2-green);
   color: var(--r2-ink);
   font-family: var(--r2-body);
   font-size: 11px;
@@ -83,20 +83,6 @@
 }
 .r2contact__submit:hover { transform: translateY(-2px); opacity: 0.92; }
 
-/* --- Magenta dots scattered over the footer (Figma 2425:1630 … 2425:1634) --- */
-.r2contact__footer-dots { position: relative; }
-.r2contact__dot {
-  position: absolute;
-  z-index: 3;
-  width: clamp(70px, 10.4%, 150px);
-  height: auto;
-  pointer-events: none;
-}
-.r2contact__dot--0 { left: -3%;  top: 22%; }
-.r2contact__dot--1 { left: 84%;  top: 10%; }
-.r2contact__dot--2 { left: 76%;  top: 30%; }
-.r2contact__dot--3 { left: 28%;  top: 46%; }
-
 @media (max-width: 760px) {
   .r2contact__head { padding-top: 110px; }
   .r2contact__body { padding-block: 40px 64px; }
@@ -106,5 +92,4 @@
 
 @media (max-width: 460px) {
   .r2contact__head { padding-top: 92px; }
-  .r2contact__dot { width: clamp(56px, 18%, 96px); }
 }

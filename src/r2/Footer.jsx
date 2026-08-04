@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import DotTrail from './DotTrail.jsx'
 import { LEGAL_LINKS, SOCIALS } from './siteData.js'
 import './Footer.css'
 
@@ -53,6 +54,8 @@ const ICONS = {
 export default function Footer() {
   return (
     <footer className="r2footer">
+      <DotTrail />
+
       <div className="r2footer__playbill">
         <img
           className="r2footer__lockup"

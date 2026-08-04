@@ -2,19 +2,40 @@
    Awards / Press — Figma 2425:1635
    ========================================================================== */
 
-/* The laurel exports carry an opaque black plate, so the page sits on pure
-   black here rather than the slightly-warm --r2-black used elsewhere. */
-.r2awards { background: var(--r2-ink); }
-
 .r2awards__head {
   padding-top: 150px;
   padding-bottom: 8px;
 }
 
 .r2awards__body {
-  padding-block: 60px 96px;
+  padding-block: 44px 196px;
 }
 
+/* --- View toggle ---------------------------------------------------------- */
+.r2awards__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--r2-cream-12);
+  margin-bottom: 40px;
+}
+
+.r2awards__views { display: flex; gap: 14px; }
+.r2awards__views button {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  color: var(--r2-cream-40);
+  transition: color 0.2s var(--r2-ease);
+}
+.r2awards__views button svg { width: 20px; height: 20px; }
+.r2awards__views button:hover { color: var(--r2-cream-70); }
+.r2awards__views button.is-active { color: var(--r2-cream); }
+
+/* --- Laurel grid ---------------------------------------------------------- */
 .r2awards__grid {
   list-style: none;
   display: grid;
@@ -22,6 +43,19 @@
   gap: 64px 40px;
   align-items: center;
   justify-items: center;
+  /* Shared perspective so neighbouring laurels tilt in the same visual space */
+  perspective: 900px;
+}
+
+/* --rx / --ry / --lift are written by the parallax hook in Awards.jsx */
+.r2awards__grid > li {
+  --rx: 0deg;
+  --ry: 0deg;
+  --lift: 0px;
+  transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) translateZ(var(--lift));
+  transform-style: preserve-3d;
+  transition: transform 0.35s var(--r2-ease);
+  will-change: transform;
 }
 
 .r2awards__grid img {
@@ -32,15 +66,48 @@
   display: block;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .r2awards__grid > li { transform: none; }
+}
+
+/* --- List view ------------------------------------------------------------ */
+.r2awards__list { list-style: none; }
+.r2awards__list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: 24px;
+  align-items: baseline;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--r2-cream-12);
+}
+
+.r2awards__festival {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  color: var(--r2-cream);
+}
+.r2awards__distinction {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: var(--r2-cream-55);
+}
+
 @media (max-width: 1024px) {
   .r2awards__grid { grid-template-columns: repeat(4, 1fr); gap: 52px 32px; }
 }
 
 @media (max-width: 760px) {
   .r2awards__head { padding-top: 110px; }
-  .r2awards__body { padding-block: 44px 72px; }
+  .r2awards__body { padding-block: 32px 172px; }
   .r2awards__grid { grid-template-columns: repeat(3, 1fr); gap: 40px 24px; }
   .r2awards__grid img { height: clamp(58px, 13vw, 96px); }
+  .r2awards__list li {
+    grid-template-columns: 1fr;
+    gap: 5px;
+    padding: 14px 0;
+  }
 }
 
 @media (max-width: 460px) {

@@ -1,0 +1,94 @@
+/* ==========================================================================
+   Case study trailer hero — replaces the static still in Figma 2330:1498
+   ========================================================================== */
+
+.r2trailer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1440 / 750;
+  max-height: 84svh;
+  overflow: hidden;
+  background: var(--r2-black);
+}
+
+.r2trailer__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 32%;
+  display: block;
+  border: 0;
+}
+
+/* YouTube iframes can't be object-fit — scale the 16:9 frame to cover instead. */
+.r2trailer__frame {
+  inset: 50% auto auto 50%;
+  translate: -50% -50%;
+  width: 100%;
+  height: 56.25vw;          /* 16:9 against the viewport width */
+  min-height: 100%;
+  min-width: 177.78vh;      /* …and against its own height */
+  object-fit: unset;
+}
+
+.r2trailer__poster {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  cursor: pointer;
+  color: var(--r2-cream);
+}
+
+.r2trailer__poster::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.45));
+  transition: opacity 0.3s var(--r2-ease);
+  opacity: 0.7;
+}
+.r2trailer__poster:hover::after { opacity: 1; }
+
+.r2trailer__play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: clamp(64px, 6.6vw, 94px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--r2-green);
+  color: var(--r2-ink);
+  transition: transform 0.3s var(--r2-ease);
+}
+.r2trailer__play svg {
+  width: 42%;
+  height: 42%;
+  margin-left: 8%;   /* optically centre the triangle */
+}
+.r2trailer__poster:hover .r2trailer__play { transform: scale(1.08); }
+
+.r2trailer__label {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + clamp(48px, 4.8vw, 68px));
+  translate: -50% 0;
+  z-index: 2;
+  font-family: var(--r2-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+@media (max-width: 600px) {
+  .r2trailer { aspect-ratio: 4 / 3; }
+  .r2trailer__label { font-size: 10px; letter-spacing: 0.14em; }
+}

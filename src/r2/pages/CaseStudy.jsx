@@ -1,5 +1,6 @@
 import { useParams, Navigate, Link } from 'react-router-dom'
 import Nav from '../Nav.jsx'
+import TrailerHero from '../TrailerHero.jsx'
 import Ticker from '../Ticker.jsx'
 import Footer from '../Footer.jsx'
 import { projectBySlug, FILM_PROJECTS } from '../siteData.js'
@@ -11,7 +12,7 @@ export default function CaseStudy() {
   const project = projectBySlug(slug)
   if (!project) return <Navigate to="/404" replace />
 
-  const { title, category, desc, poster, blockBg, heroStill, details, trailer, trailerLocal } = project
+  const { title, category, desc, poster, details, trailer, trailerLocal } = project
   // Films only — the podcast shares the HTCTW cover art and would read as a dupe.
   const more = FILM_PROJECTS.filter((p) => p.slug !== slug).slice(0, 5)
 
@@ -19,9 +20,7 @@ export default function CaseStudy() {
     <div className="r2-page">
       <Nav tone="green" />
       <main>
-        <section className="r2cs__hero">
-          <img src={heroStill || blockBg} alt="" aria-hidden="true" />
-        </section>
+        <TrailerHero project={project} />
 
         <section className="r2-wrap r2cs__intro">
           <div className="r2cs__copy">
@@ -40,15 +39,12 @@ export default function CaseStudy() {
               </dl>
             ) : null}
 
-            {trailer ? (
+            {/* The hero plays the trailer inline; this is just the direct link out. */}
+            {trailer && !trailerLocal ? (
               <p className="r2cs__trailer-link">
-                {trailerLocal ? (
-                  <a href={trailer} target="_blank" rel="noopener noreferrer">WATCH TRAILER <span aria-hidden="true">↗</span></a>
-                ) : (
-                  <a href={`https://www.youtube.com/watch?v=${trailer}`} target="_blank" rel="noopener noreferrer">
-                    WATCH TRAILER <span aria-hidden="true">↗</span>
-                  </a>
-                )}
+                <a href={`https://www.youtube.com/watch?v=${trailer}`} target="_blank" rel="noopener noreferrer">
+                  WATCH ON YOUTUBE <span aria-hidden="true">↗</span>
+                </a>
               </p>
             ) : null}
           </div>
@@ -61,7 +57,7 @@ export default function CaseStudy() {
         </section>
 
         <section className="r2-wrap r2cs__more">
-          <span className="r2cs__chip">MORE PROJECTS</span>
+          <img className="r2cs__chip" src="/assets/r2/chips/more-projects.webp" alt="More projects" />
           <ul className="r2cs__rail">
             {more.map((p) => (
               <li key={p.slug}>

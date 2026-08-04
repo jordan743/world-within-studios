@@ -87,12 +87,9 @@ export default function Contact() {
         <Ticker />
       </main>
 
-      <div className="r2contact__footer-dots" aria-hidden="true">
-        {[0, 1, 2, 3].map((i) => (
-          <img key={i} src="/assets/r2/pages/pink-dot.webp" alt="" className={`r2contact__dot r2contact__dot--${i}`} />
-        ))}
-        <Footer />
-      </div>
+      {/* The magenta dots that used to be baked in here now come from the
+          footer's interactive DotTrail, which every page shares. */}
+      <Footer />
     </div>
   )
 }

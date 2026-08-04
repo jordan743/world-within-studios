@@ -2,14 +2,6 @@
    Podcast — Figma 2356:733 · List View 2430:5634
    ========================================================================== */
 
-.r2-sr {
-  position: absolute;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden; clip-path: inset(50%);
-  white-space: nowrap; border: 0;
-}
-
 /* --- Hero ----------------------------------------------------------------- */
 .r2pod__hero {
   position: relative;
@@ -102,17 +94,11 @@
   margin-bottom: 30px;
 }
 
+/* Exported torn-paper label from Figma 2430:6398 */
 .r2pod__chip {
-  display: inline-block;
-  font-family: var(--r2-display);
-  font-weight: 800;
-  font-size: clamp(16px, 1.8vw, 24px);
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-  color: var(--r2-ink);
-  background: var(--r2-cream);
-  padding: 9px 22px;
-  border-radius: 2px;
+  display: block;
+  width: clamp(214px, 23.3vw, 336px);
+  height: auto;
 }
 
 .r2pod__views { display: flex; gap: 14px; }
@@ -135,10 +121,12 @@
   gap: 10px;
 }
 .r2pod__card {
+  position: relative;
   display: block;
-  aspect-ratio: 431 / 242;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   background: var(--r2-black);
+  color: var(--r2-cream);
 }
 .r2pod__card img {
   width: 100%;
@@ -149,15 +137,40 @@
 }
 .r2pod__card:hover img { transform: scale(1.04); }
 
+/* Feed titles aren't baked into the thumbnails, so caption them. */
+.r2pod__card-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 42px 14px 12px;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.32;
+  background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.88));
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.r2pod__row-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  background: var(--r2-black);
+}
+
 /* List view */
 .r2pod__list-head { margin-bottom: 18px; }
 .r2pod__list ul { list-style: none; }
 .r2pod__list li {
   display: grid;
-  grid-template-columns: 106px 250px minmax(0, 1fr) 118px;
+  grid-template-columns: 132px 118px 260px minmax(0, 1fr) 118px;
   gap: 24px;
-  align-items: baseline;
-  padding: 16px 0;
+  align-items: center;
+  padding: 14px 0;
   border-top: 1px solid var(--r2-cream-12);
 }
 .r2pod__list li:last-child { border-bottom: 1px solid var(--r2-cream-12); }
@@ -194,7 +207,7 @@
 /* --- Responsive ----------------------------------------------------------- */
 @media (max-width: 1024px) {
   .r2pod__meta { grid-template-columns: minmax(0, 1fr) 300px; gap: 44px; }
-  .r2pod__list li { grid-template-columns: 92px 200px minmax(0, 1fr) 108px; gap: 18px; }
+  .r2pod__list li { grid-template-columns: 104px 230px minmax(0, 1fr) 108px; gap: 18px; }
 }
 
 @media (max-width: 860px) {
@@ -209,16 +222,19 @@
 
   /* Episode rows reflow to a stacked card */
   .r2pod__list li {
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 92px minmax(0, 1fr);
     grid-template-areas:
-      'ep    watch'
-      'guest guest'
-      'blurb blurb';
-    gap: 8px 16px;
+      'thumb ep'
+      'thumb guest'
+      'blurb blurb'
+      'watch watch';
+    gap: 6px 14px;
+    align-items: start;
     padding: 18px 0;
   }
+  .r2pod__row-thumb { grid-area: thumb; }
   .r2pod__ep { grid-area: ep; }
-  .r2pod__watch { grid-area: watch; }
+  .r2pod__watch { grid-area: watch; justify-self: start; margin-top: 6px; }
   .r2pod__guest { grid-area: guest; }
   .r2pod__blurb { grid-area: blurb; }
 }

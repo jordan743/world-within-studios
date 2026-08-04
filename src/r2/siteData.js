@@ -3,6 +3,10 @@
    Single source of truth for navigation, projects, and podcast episodes.
    ========================================================================== */
 
+/* Latest uploads, refreshed from the channel's RSS feed at build time by
+   scripts/fetch-episodes.mjs (wired to prebuild, so every deploy is current). */
+import feed from './episodes.generated.json'
+
 const A = '/assets/r2'
 
 /* --------------------------------------------------------------------------
@@ -67,6 +71,7 @@ export const HERO_INTERVAL_MS = 2600
 export const PROJECTS = [
   {
     slug: 'how-to-change-the-world',
+    bar: `${A}/bars/how-to-change-the-world.svg`,
     title: 'HOW TO CHANGE THE WORLD',
     titleLines: ['HOW TO CHANGE', 'THE WORLD'],
     category: 'DOCUMENTARY SERIES',
@@ -83,6 +88,7 @@ export const PROJECTS = [
   },
   {
     slug: 'makaylas-voice',
+    bar: `${A}/bars/makaylas-voice.svg`,
     title: "MAKAYLA'S VOICE: A LETTER TO THE WORLD",
     titleLines: ["MAKAYLA'S VOICE:", 'A LETTER TO THE WORLD'],
     category: 'A NETFLIX DOCUMENTARY FILM',
@@ -100,6 +106,7 @@ export const PROJECTS = [
   },
   {
     slug: 'voice-of-hind-rajab',
+    bar: `${A}/bars/voice-of-hind-rajab.svg`,
     title: 'VOICE OF HIND RAJAB',
     titleLines: ['VOICE OF', 'HIND RAJAB'],
     category: 'FEATURE FILM',
@@ -113,6 +120,7 @@ export const PROJECTS = [
   },
   {
     slug: 'shuffle',
+    bar: `${A}/bars/shuffle.svg`,
     title: 'SHUFFLE',
     titleLines: ['SHUFFLE'],
     category: 'DOCUMENTARY FILM',
@@ -122,12 +130,13 @@ export const PROJECTS = [
     poster: `${A}/posters/shuffle.webp`,
     blockBg: `${A}/blocks/shuffle.webp`,
     heroStill: `${A}/pages/shuffle-still.webp`,
-    badges: [`${A}/blocks/badge-sxsw.webp`],
+    badges: [`${A}/blocks/shuffle-badge.webp`],
     trailer: 'ZNy0_Elm-Ts',
     details: { Format: 'Documentary Feature', Award: 'SXSW Documentary Feature Competition Winner' },
   },
   {
     slug: 'how-to-change-the-world-podcast',
+    bar: `${A}/bars/how-to-change-the-world-podcast.svg`,
     title: 'HOW TO CHANGE THE WORLD',
     titleLines: ['HOW TO CHANGE', 'THE WORLD'],
     category: 'PODCAST SERIES',
@@ -140,6 +149,7 @@ export const PROJECTS = [
   },
   {
     slug: 'helenibelieve',
+    bar: `${A}/bars/helenibelieve.svg`,
     title: 'HELEN | BELIEVE',
     titleLines: ['HELEN | BELIEVE'],
     category: 'DOCUMENTARY FILM',
@@ -148,12 +158,13 @@ export const PROJECTS = [
     cover: `${A}/covers/helenibelieve.webp`,
     poster: `${A}/posters/helenibelieve.webp`,
     blockBg: `${A}/blocks/helenibelieve.webp`,
-    badges: [`${A}/blocks/badge-big-sky.webp`],
+    badges: [`${A}/blocks/helen-badge.webp`],
     trailer: '_wtmiAjaIRU',
     details: { Format: 'Documentary Film', Producer: 'Chris Pratt', Subject: 'Helen Maroulis' },
   },
   {
     slug: 'bubjan',
+    bar: `${A}/bars/bubjan.svg`,
     title: 'BUBJAN',
     titleLines: ['BUBJAN'],
     category: 'DOCUMENTARY SHORT',
@@ -162,12 +173,13 @@ export const PROJECTS = [
     cover: `${A}/covers/bubjan.webp`,
     poster: `${A}/posters/bubjan.webp`,
     blockBg: `${A}/blocks/bubjan.webp`,
-    badges: [`${A}/blocks/badge-dcdox.webp`, `${A}/awards/hmma-bubjan.webp`, `${A}/awards/anthem-persian.webp`],
+    badges: [`${A}/blocks/bubjan-badges.webp`],
     trailer: 'dzQ3zupU4QE',
     details: { Format: 'Documentary Short', Subject: 'Parwiz Zafari' },
   },
   {
     slug: 'river-of-spirits',
+    bar: `${A}/bars/river-of-spirits.svg`,
     title: 'RIVER OF SPIRITS',
     titleLines: ['RIVER OF', 'SPIRITS'],
     category: 'DOCUMENTARY FILM',
@@ -223,39 +235,16 @@ export const PODCAST = {
   ],
 }
 
-const YT = (id) => `https://www.youtube.com/watch?v=${id}`
 const YT_CHANNEL = 'https://www.youtube.com/@worldwithinstudios'
 
-/* Latest-episode cards shown in grid view (Figma 2430:3700). */
-export const PODCAST_FEATURED = [
-  { id: 'masculinity', title: 'We Got Masculinity Wrong', guest: 'Chicago CRED', img: `${A}/episodes/ep-masculinity.webp`, href: YT_CHANNEL },
-  { id: 'sports', title: 'What Sports Really Teach Us', guest: 'Mike Tollin', img: `${A}/episodes/ep-sports.webp`, href: YT_CHANNEL },
-  { id: 'bermuda', title: 'Bermuda Triangle of Talent', guest: 'Rutger Bregman', img: `${A}/episodes/ep-bermuda.webp`, href: YT(`o1zNEvXAKaY`) },
-  { id: 'greedy', title: 'Be Morally Greedy', guest: 'Rutger Bregman', img: `${A}/episodes/ep-morally-greedy.webp`, href: YT(`o1zNEvXAKaY`) },
-  { id: 'jail', title: 'Only One Person Went to Jail?!', guest: 'Kat Taylor', img: `${A}/episodes/ep-one-person-jail.webp`, href: YT(`OeFPa3_TswA`) },
-  { id: 'rebuilding', title: 'Rebuilding Our Town', guest: 'reVillage', img: `${A}/episodes/ep-rebuilding-our-town.webp`, href: YT_CHANNEL },
-]
+export const YT_FEED = {
+  fetchedAt: feed.fetchedAt,
+  channelUrl: YT_CHANNEL,
+  episodes: feed.episodes ?? [],
+}
 
-/* Full episode guide, newest first (Figma "List View" 2430:5634). */
-export const PODCAST_EPISODES = [
-  { ep: 17, guest: 'RUTGER BREGMAN', blurb: 'Historian and author Rutger Bregman argues that society rewards playing it safe over pursuing meaningful…', href: YT('o1zNEvXAKaY') },
-  { ep: 16, guest: 'DR. ABBAS MILANI', blurb: 'Part three. Dr. Abbas Milani on modern Iranian history and the battle between secular modernization and theocratic rule…', href: YT('Sp8bicDIu6k') },
-  { ep: 15, guest: 'GISSOU NIA', blurb: 'Part two. Human rights attorney Gissou Nia on legal strategies against brutal regimes and accountability through courts…', href: YT('pRayh6GtNqc') },
-  { ep: 14, guest: 'ADNAN HADAD', blurb: 'Part one of our Iran miniseries. Adnan Hadad left stable employment to join the Syrian revolution…', href: YT('mK_dXjzxkJM') },
-  { ep: 13, guest: 'RAMI HELALI', blurb: 'Rami Helali of KOTN on building an ethical fashion brand from the ground up…', href: YT_CHANNEL },
-  { ep: 12, guest: 'KAT TAYLOR', blurb: "Kat Taylor, co-founder of Beneficial State Bank, on what's broken in our banking system…", href: YT('OeFPa3_TswA') },
-  { ep: 11, guest: 'COOPER HIBBARD', blurb: 'A Montana rancher on family legacy, inherited values, and what it means to steward the land…', href: YT('o3qpRjgO-eA') },
-  { ep: 10, guest: 'COLE MANNIX', blurb: 'Cole Mannix of Old Salt Co-op on how a small Montana town is fighting back against industrial agriculture…', href: YT_CHANNEL },
-  { ep: 9, guest: 'MOHAMED HAGE & DAVE FURNEAUX', blurb: "The founders of Lufa Farms on building the world's first commercial rooftop greenhouse network…", href: YT_CHANNEL },
-  { ep: 8, guest: 'SAM TEICHER', blurb: 'Sam Teicher, co-founder of Coral Vita, on what it actually takes to rescue a coral reef…', href: YT_CHANNEL },
-  { ep: 7, guest: 'ARIAN MOAYED', blurb: 'Arian Moayed (Succession, Marvel) on the craft of storytelling and the responsibility of the artist…', href: YT('sx7-VZSqBGM') },
-  { ep: 6, guest: 'ARNE DUNCAN', blurb: 'Arne Duncan, Curtis Toler, and Billy Moore of Chicago CRED on their radically human approach to violence…', href: YT_CHANNEL },
-  { ep: 5, guest: 'SAM KASS', blurb: 'One part The Bear, one part The West Wing. Sam Kass on his path from fine dining to the Obama White House…', href: YT('VO8TSLj_hvo') },
-  { ep: 4, guest: 'GERALYN DREYFOUS', blurb: 'Oscar-winning documentary producer Geralyn Dreyfous explores the future of impact storytelling…', href: YT('LGxfwiN-NDA') },
-  { ep: 3, guest: 'GINJAN BROS', blurb: 'Brothers Mo and Rahim Diallo share their winding journey from Guinea to New York City…', href: YT_CHANNEL },
-  { ep: 2, guest: 'BRANDON STANTON', blurb: 'Brandon Stanton on his biggest project yet — a massive photo exhibit at Grand Central…', href: YT('ELoyfQNgFTE') },
-  { ep: 1, guest: 'BRANDON STANTON', blurb: 'Brandon Stanton, Founder of Humans of New York, prepares for the biggest moment of his career…', href: YT('XaYVSQ7CjkA') },
-]
+/** Everything the feed returned — both the thumbnail grid and the list view. */
+export const ALL_EPISODES = YT_FEED.episodes
 
 /* --------------------------------------------------------------------------
    Awards / Press — laurels sliced from Figma rows 2425:1791 … 2425:1795
