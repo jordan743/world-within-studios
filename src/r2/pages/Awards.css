@@ -40,6 +40,9 @@
   list-style: none;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  /* Extra breathing room above the first row — the list view keeps the
+     tighter spacing off the toggle bar. */
+  margin-top: 100px;
   gap: 64px 40px;
   align-items: center;
   justify-items: center;
