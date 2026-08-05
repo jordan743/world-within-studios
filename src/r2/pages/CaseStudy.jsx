@@ -69,7 +69,12 @@ export default function CaseStudy() {
             {more.map((p) => (
               <li key={p.slug}>
                 <Link to={`/${p.slug}`} className="r2cs__rail-card">
-                  <img src={p.cover} alt="" aria-hidden="true" loading="lazy" />
+                  {/* Styled cover by default, real poster on hover — the same
+                      swap the film grid does; see ProjectCard.jsx. */}
+                  <img className="r2cs__rail-cover" src={p.cover} alt="" aria-hidden="true" loading="lazy" />
+                  {p.poster ? (
+                    <img className="r2cs__rail-poster" src={p.poster} alt="" aria-hidden="true" loading="lazy" />
+                  ) : null}
                   <span className="r2cs__rail-meta">
                     <span className="r2cs__rail-cat">{p.category}</span>
                     <span className="r2cs__rail-title">{p.title}</span>
