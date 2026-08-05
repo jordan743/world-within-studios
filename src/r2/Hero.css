@@ -25,6 +25,11 @@
   height: 100%;
   object-fit: cover;
   object-position: top center;
+  /* 25% darker. A filter on the image rather than another layer over it —
+     mathematically the same as a 25% black wash, but it keeps the "nothing
+     sits on top of the artwork" rule this hero was rebuilt around, and it
+     can't end up stacked with the crossfade's opacity. */
+  filter: brightness(0.75);
   opacity: 0;
   transition: opacity 1.1s var(--r2-ease);
   will-change: opacity;
