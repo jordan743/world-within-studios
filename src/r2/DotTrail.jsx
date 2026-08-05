@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
+import { STICKERS } from './siteData.js'
 import './DotTrail.css'
 
 /**
- * Magenta dots that trail the cursor across the footer and stay where they
- * land. Purely session-lived — nothing is persisted, so a refresh clears them.
+ * Paper stickers that trail the cursor across the footer and stay where they
+ * land, drawn at random from STICKERS. Purely session-lived — nothing is
+ * persisted, so a refresh clears them.
  *
  * Dots are laid down on a distance threshold rather than every mousemove, so
  * the trail reads as spaced stamps (like the Figma comps) instead of a smear,
@@ -35,6 +37,7 @@ export default function DotTrail() {
 
     let last = null
     let seq = 0
+    let lastSticker = null
     let needed = DOT_SIZE + EDGE_GAP + Math.random() * GAP_JITTER
 
     /* Regions a dot must never cover — the legal links and the social icons,
@@ -82,8 +85,16 @@ export default function DotTrail() {
       // Re-roll the threshold so the next dot lands at a different interval.
       needed = DOT_SIZE + EDGE_GAP + Math.random() * GAP_JITTER
 
+      /* Draw from the set at random rather than cycling it, so the trail has no
+         detectable order. The one rule is that a sticker can't follow itself —
+         a genuinely uniform draw pairs neighbours often enough to look
+         intentional, which is the pattern this is trying not to have. */
+      const pool = STICKERS.length > 1 ? STICKERS.filter((s) => s.id !== lastSticker) : STICKERS
+      const sticker = pool[Math.floor(Math.random() * pool.length)]
+      lastSticker = sticker.id
+
       setDots((cur) => {
-        const next = [...cur, { id: i, x, y, spin: ((i * 47) % 40) - 20 }]
+        const next = [...cur, { id: i, x, y, spin: ((i * 47) % 40) - 20, src: sticker.src }]
         return next.length > MAX_DOTS ? next.slice(next.length - MAX_DOTS) : next
       })
     }
@@ -101,7 +112,7 @@ export default function DotTrail() {
         <img
           key={d.id}
           className="r2dots__dot"
-          src="/assets/r2/pages/pink-dot.webp"
+          src={d.src}
           alt=""
           style={{
             left: `${d.x}px`,

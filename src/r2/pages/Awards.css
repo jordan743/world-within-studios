@@ -108,7 +108,10 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 32px;
-  padding-block: 44px 56px;
+  padding-block: 44px 40px;
+  /* An extra gutter on top of the wrapper's, so the outer two groups are
+     inset from the laurel grid's edges rather than flush with them. */
+  padding-inline: var(--r2-gutter);
   text-align: center;
 }
 

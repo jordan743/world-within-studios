@@ -65,6 +65,23 @@ export const HERO_SLIDES = [1, 2, 3, 4, 5, 6].map((n) => ({
 export const HERO_INTERVAL_MS = 2600
 
 /* --------------------------------------------------------------------------
+   Stickers
+   Scanned peeling/crinkled paper stickers that replace the flat pink dot. The
+   footer trail and the inner-page heroes both pull from this set at random, so
+   no two stampings of the page read the same. They are cutouts with real alpha,
+   so they ship as WebP-with-alpha and must not be flattened onto a plate.
+   Aspect ratios differ on purpose — pink-price is a torn half — so anything
+   placing one sizes by width and leaves height auto.
+   -------------------------------------------------------------------------- */
+export const STICKERS = [
+  'white-round-peeling',
+  'pink-price-peeling',
+  'orange-crinkled-round',
+  'red-round-crinkled',
+  'green-round-subtle-peeling',
+].map((id) => ({ id, src: `${A}/stickers/${id}.webp` }))
+
+/* --------------------------------------------------------------------------
    Projects
    `cover`  — the WORLD WITHIN STUDIOS "PRESENTS" styled cover (grid default)
    `poster` — the real theatrical poster (revealed on hover)

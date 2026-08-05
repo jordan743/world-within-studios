@@ -1,4 +1,21 @@
+import { useState } from 'react'
+import { STICKERS } from './siteData.js'
 import './PageHero.css'
+
+const DOT_SLOTS = 5
+
+/* One sticker per slot, drawn without replacement so a single banner never
+   shows the same one twice, then reshuffled on the next mount. Chosen in a
+   state initialiser rather than inline: this runs once per mount, so the
+   stamp-down animation isn't handed a new set of images mid-sequence. */
+function pickStickers() {
+  const pool = [...STICKERS]
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[pool[i], pool[j]] = [pool[j], pool[i]]
+  }
+  return Array.from({ length: DOT_SLOTS }, (_, i) => pool[i % pool.length])
+}
 
 /**
  * Inner-page hero — Figma "hero-left" (e.g. Film/TV 2356:703).
@@ -21,6 +38,8 @@ export default function PageHero({
   bleed = false,
   aspect,
 }) {
+  const [stickers] = useState(pickStickers)
+
   const cls = [
     'r2phero',
     compact && !bleed ? 'is-compact' : '',
@@ -38,14 +57,14 @@ export default function PageHero({
           {bleed ? null : <span className="r2-grain" aria-hidden="true" />}
           {dots ? (
             <div className="r2phero__dots" aria-hidden="true">
-              {[0, 1, 2, 3, 4].map((i) => (
+              {stickers.map((sticker, i) => (
                 <img
                   key={i}
-                  src="/assets/r2/pages/pink-dot.webp"
+                  src={sticker.src}
                   alt=""
                   className={`r2phero__dot r2phero__dot--${i}`}
-                  /* Drives the stagger — each dot stamps down in turn on load,
-                     then holds. See PageHero.css. */
+                  /* Drives the stagger — each sticker stamps down in turn on
+                     load, then holds. See PageHero.css. */
                   style={{ '--i': i }}
                 />
               ))}
