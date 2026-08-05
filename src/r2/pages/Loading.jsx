@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { v } from '../siteData.js'
 import './Loading.css'
 
 /**
@@ -46,7 +47,7 @@ export default function Loading({ hold = 2400 }) {
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') skip() }}
       aria-label="Enter World Within Productions"
     >
-      <img className="r2loading__wall" src="/assets/r2/pages/loading-intro.webp" alt="World Within Productions" />
+      <img className="r2loading__wall" src={v("/assets/r2/pages/loading-intro.webp")} alt="World Within Productions" />
     </div>
   )
 }

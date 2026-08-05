@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { v } from './siteData.js'
 import './CtaBand.css'
 
 /**
@@ -14,7 +15,7 @@ export default function CtaBand({
       {/* Finished halftone artwork — it carries its own colour and texture, so
           it fills the band outright rather than multiplying into a yellow
           plate under a grain layer the way it used to. */}
-      <img className="r2cta__bg" src="/assets/r2/pages/cta-bg.webp" alt="" aria-hidden="true" loading="lazy" />
+      <img className="r2cta__bg" src={v("/assets/r2/pages/cta-bg.webp")} alt="" aria-hidden="true" loading="lazy" />
       <div className="r2-wrap r2cta__inner">
         <h2 className="r2cta__heading">
           {heading.split('\n').map((line) => (

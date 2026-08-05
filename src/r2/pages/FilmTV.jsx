@@ -4,7 +4,7 @@ import ProjectCard from '../ProjectCard.jsx'
 import CtaBand from '../CtaBand.jsx'
 import Ticker from '../Ticker.jsx'
 import Footer from '../Footer.jsx'
-import { FILM_PROJECTS } from '../siteData.js'
+import { FILM_PROJECTS, v } from '../siteData.js'
 import './ProjectGrid.css'
 
 /** Film & Television — Figma 2330:1664 (+ hover state 2353:299). */
@@ -16,7 +16,7 @@ export default function FilmTV() {
       <main>
         <PageHero
           title="Film & Television"
-          image="/assets/r2/pages/filmtv-hero.webp"
+          image={v("/assets/r2/pages/filmtv-hero.webp")}
           bleed
           aspect="1999 / 872"
         />

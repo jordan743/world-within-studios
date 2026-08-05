@@ -3,7 +3,7 @@ import Nav from '../Nav.jsx'
 import TrailerHero from '../TrailerHero.jsx'
 import Ticker from '../Ticker.jsx'
 import Footer from '../Footer.jsx'
-import { projectBySlug, FILM_PROJECTS } from '../siteData.js'
+import { projectBySlug, FILM_PROJECTS, v } from '../siteData.js'
 import './CaseStudy.css'
 
 /** Case study — Figma 2330:1497 (Shuffle template). */
@@ -64,7 +64,7 @@ export default function CaseStudy() {
         </section>
 
         <section className="r2-wrap r2cs__more">
-          <img className="r2cs__chip" src="/assets/r2/chips/more-projects.webp" alt="More projects" />
+          <img className="r2cs__chip" src={v("/assets/r2/chips/more-projects.webp")} alt="More projects" />
           <ul className="r2cs__rail">
             {more.map((p) => (
               <li key={p.slug}>

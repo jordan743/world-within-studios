@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import DotTrail from './DotTrail.jsx'
-import { LEGAL_LINKS, SOCIALS } from './siteData.js'
+import { LEGAL_LINKS, SOCIALS, v } from './siteData.js'
 import './Footer.css'
 
 /* Footer-only, so the counter-shapes in the YouTube and Spotify marks are
@@ -65,14 +65,14 @@ export default function Footer() {
       <div className="r2footer__playbill">
         <img
           className="r2footer__lockup"
-          src="/assets/r2/footer/playbill-lockup.svg"
+          src={v("/assets/r2/footer/playbill-lockup.svg")}
           alt="World Within Productions presents"
         />
         <span className="r2-grain" aria-hidden="true" />
       </div>
 
       <div className="r2footer__strip">
-        <img src="/assets/r2/footer/filmset.webp" alt="" aria-hidden="true" />
+        <img src={v("/assets/r2/footer/filmset.webp")} alt="" aria-hidden="true" />
       </div>
 
       <div className="r2footer__bar">

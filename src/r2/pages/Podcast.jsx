@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Nav from '../Nav.jsx'
 import Ticker from '../Ticker.jsx'
 import Footer from '../Footer.jsx'
-import { PODCAST, ALL_EPISODES } from '../siteData.js'
+import { PODCAST, ALL_EPISODES, v } from '../siteData.js'
 import './Podcast.css'
 
 function GridIcon() {
@@ -88,7 +88,7 @@ export default function Podcast() {
 
         <section className="r2-wrap r2pod__episodes">
           <div className="r2pod__bar">
-            <img className="r2pod__chip" src="/assets/r2/chips/latest-episodes.webp" alt="Latest episodes" />
+            <img className="r2pod__chip" src={v("/assets/r2/chips/latest-episodes.webp")} alt="Latest episodes" />
             <div className="r2pod__views" role="group" aria-label="Episode layout">
               <button
                 type="button"

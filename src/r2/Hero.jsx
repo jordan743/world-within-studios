@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { HERO_SLIDES, HERO_INTERVAL_MS } from './siteData.js'
+import { HERO_SLIDES, HERO_INTERVAL_MS, v } from './siteData.js'
 import './Hero.css'
 
 /**
@@ -50,7 +50,7 @@ export default function Hero() {
 
       <div className="r2hero__plate">
         <img
-          src="/assets/r2/headline-we-make-good-cool.svg"
+          src={v("/assets/r2/headline-we-make-good-cool.svg")}
           alt="We make good cool"
         />
       </div>

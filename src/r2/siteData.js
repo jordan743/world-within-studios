@@ -9,6 +9,22 @@ import feed from './episodes.generated.json'
 
 const A = '/assets/r2'
 
+/* ---------------------------------------------------------------------------
+   One-time cache bust.
+
+   `/assets/r2/**` was briefly served `max-age=31536000, immutable`. `immutable`
+   tells a browser not to revalidate at all, so anyone who visited during that
+   window pinned whatever art was live then — for a year. The Bubjan home block
+   was still painting a 258px thumbnail long after the 2062px master replaced
+   it, and it looked exactly like a bad deploy rather than a stale cache.
+
+   Changing the URL is the only thing those caches will treat as a new file.
+   The header is `must-revalidate` now, so this should not need bumping again;
+   swapping an asset in place is enough from here on.
+   --------------------------------------------------------------------------- */
+export const ASSET_V = 2
+export const v = (path) => `${path}?v=${ASSET_V}`
+
 /* --------------------------------------------------------------------------
    Navigation
    `hidden: true` keeps a route alive but takes the item out of the menu.
@@ -90,15 +106,15 @@ export const STICKERS = [
 export const PROJECTS = [
   {
     slug: 'how-to-change-the-world',
-    bar: `${A}/bars/how-to-change-the-world.svg`,
+    bar: v(`${A}/bars/how-to-change-the-world.svg`),
     title: 'HOW TO CHANGE THE WORLD',
     titleLines: ['HOW TO CHANGE', 'THE WORLD'],
     category: 'DOCUMENTARY SERIES',
     kind: 'film',
     desc: 'How To Change The World is a documentary series that explores the transformative power of social entrepreneurship. Produced by World Within Productions and Religion of Sports, with executive producers Mark Cuban, Gotham Chopra, and Geralyn Dreyfous.',
-    cover: `${A}/covers/how-to-change-the-world.webp`,
-    poster: `${A}/posters/how-to-change-the-world.webp`,
-    blockBg: `${A}/blocks/htctw.webp`,
+    cover: v(`${A}/covers/how-to-change-the-world.webp`),
+    poster: v(`${A}/posters/how-to-change-the-world.webp`),
+    blockBg: v(`${A}/blocks/htctw.webp`),
     details: {
       Format: 'Documentary Series',
       Producers: 'World Within Productions, Religion of Sports',
@@ -107,15 +123,15 @@ export const PROJECTS = [
   },
   {
     slug: 'makaylas-voice',
-    bar: `${A}/bars/makaylas-voice.svg`,
+    bar: v(`${A}/bars/makaylas-voice.svg`),
     title: "MAKAYLA'S VOICE: A LETTER TO THE WORLD",
     titleLines: ["MAKAYLA'S VOICE:", 'A LETTER TO THE WORLD'],
     category: 'A NETFLIX DOCUMENTARY FILM',
     kind: 'film',
     desc: 'OSCARS® Shortlist for Best Documentary Short. A powerful portrait of a non-speaking autistic teen as she finds her voice, revealing the depth of her thoughts, creativity, and personality.',
-    cover: `${A}/covers/makaylas-voice.webp`,
-    poster: `${A}/posters/makaylas-voice.webp`,
-    blockBg: `${A}/blocks/makaylas-voice.webp`,
+    cover: v(`${A}/covers/makaylas-voice.webp`),
+    poster: v(`${A}/posters/makaylas-voice.webp`),
+    blockBg: v(`${A}/blocks/makaylas-voice.webp`),
     trailer: 'Wm26JFhz5RE',
     details: {
       Format: 'Documentary Short',
@@ -125,92 +141,92 @@ export const PROJECTS = [
   },
   {
     slug: 'voice-of-hind-rajab',
-    bar: `${A}/bars/voice-of-hind-rajab.svg`,
+    bar: v(`${A}/bars/voice-of-hind-rajab.svg`),
     title: 'VOICE OF HIND RAJAB',
     titleLines: ['VOICE OF', 'HIND RAJAB'],
     category: 'FEATURE FILM',
     kind: 'film',
     desc: 'Venice Film Festival Grand Jury Prize Winner. The Voice of Hind Rajab tells the story of a 6-year-old girl trapped in a car under IDF fire in Gaza, pleading for rescue while Red Crescent volunteers do everything they can to reach her.',
-    cover: `${A}/covers/voice-of-hind-rajab.webp`,
-    poster: `${A}/posters/voice-of-hind-rajab.webp`,
-    blockBg: `${A}/blocks/voice-of-hind-rajab.webp`,
+    cover: v(`${A}/covers/voice-of-hind-rajab.webp`),
+    poster: v(`${A}/posters/voice-of-hind-rajab.webp`),
+    blockBg: v(`${A}/blocks/voice-of-hind-rajab.webp`),
     trailer: 'hrssPpqv6vc',
     details: { Format: 'Feature Film', Award: 'Venice Film Festival — Grand Jury Prize' },
   },
   {
     slug: 'shuffle',
-    bar: `${A}/bars/shuffle.svg`,
+    bar: v(`${A}/bars/shuffle.svg`),
     title: 'SHUFFLE',
     titleLines: ['SHUFFLE'],
     category: 'DOCUMENTARY FILM',
     kind: 'film',
     desc: 'SXSW Documentary Feature Competition Winner. Shuffle follows three individuals whose lives depend not on getting into treatment, but on getting out alive — shining a light on the insurance-fueled cycle of addiction treatment fraud.',
-    cover: `${A}/covers/shuffle.webp`,
-    poster: `${A}/posters/shuffle.webp`,
-    blockBg: `${A}/blocks/shuffle.webp`,
-    heroStill: `${A}/pages/shuffle-still.webp`,
-    badges: [`${A}/blocks/shuffle-badge.webp`],
+    cover: v(`${A}/covers/shuffle.webp`),
+    poster: v(`${A}/posters/shuffle.webp`),
+    blockBg: v(`${A}/blocks/shuffle.webp`),
+    heroStill: v(`${A}/pages/shuffle-still.webp`),
+    badges: [v(`${A}/blocks/shuffle-badge.webp`)],
     trailer: 'ZNy0_Elm-Ts',
     details: { Format: 'Documentary Feature', Award: 'SXSW Documentary Feature Competition Winner' },
   },
   {
     slug: 'how-to-change-the-world-podcast',
-    bar: `${A}/bars/how-to-change-the-world-podcast.svg`,
+    bar: v(`${A}/bars/how-to-change-the-world-podcast.svg`),
     title: 'HOW TO CHANGE THE WORLD',
     titleLines: ['HOW TO CHANGE', 'THE WORLD'],
     category: 'PODCAST SERIES',
     kind: 'podcast',
     desc: 'Produced with PRX, How to Change the World features provocative conversations with the heroes among us—mission-driven founders, artists, thought leaders, and those on the front lines building a better world.',
-    cover: `${A}/covers/how-to-change-the-world.webp`,
+    cover: v(`${A}/covers/how-to-change-the-world.webp`),
     poster: '/assets/poster-podcast.jpg',
-    blockBg: `${A}/blocks/podcast.webp`,
+    blockBg: v(`${A}/blocks/podcast.webp`),
     /* There is no trailer, so the case study hero falls back to a still.
        `heroStill` keeps that separate from `blockBg`, which is the home stack's
        image and should stay as it is. Shares the artwork with /podcast. */
-    heroStill: `${A}/pages/podcast-hero.webp`,
+    heroStill: v(`${A}/pages/podcast-hero.webp`),
     details: { Format: 'Podcast Series', Producer: 'World Within Productions', Partner: 'PRX' },
   },
   {
     slug: 'helenibelieve',
-    bar: `${A}/bars/helenibelieve.svg`,
+    bar: v(`${A}/bars/helenibelieve.svg`),
     title: 'HELEN | BELIEVE',
     titleLines: ['HELEN | BELIEVE'],
     category: 'DOCUMENTARY FILM',
     kind: 'film',
     desc: "From Producer Chris Pratt, Helen | Believe follows Olympic wrestler Helen Maroulis' astonishing comeback after suffering a career-ending injury — her gripping battle with self-doubt and PTSD in pursuit of a second chance at greatness at the Tokyo Olympics.",
-    cover: `${A}/covers/helenibelieve.webp`,
-    poster: `${A}/posters/helenibelieve.webp`,
-    blockBg: `${A}/blocks/helenibelieve.webp`,
-    badges: [`${A}/blocks/helen-badge.webp`],
+    cover: v(`${A}/covers/helenibelieve.webp`),
+    poster: v(`${A}/posters/helenibelieve.webp`),
+    blockBg: v(`${A}/blocks/helenibelieve.webp`),
+    badges: [v(`${A}/blocks/helen-badge.webp`)],
     trailer: '_wtmiAjaIRU',
     details: { Format: 'Documentary Film', Producer: 'Chris Pratt', Subject: 'Helen Maroulis' },
   },
   {
     slug: 'bubjan',
-    bar: `${A}/bars/bubjan.svg`,
+    bar: v(`${A}/bars/bubjan.svg`),
     title: 'BUBJAN',
     titleLines: ['BUBJAN'],
     category: 'DOCUMENTARY SHORT',
     kind: 'film',
     desc: 'Bubjan chronicles the journey of Parwiz Zafari, a former member of the Iranian parliament who dedicated his life to cultivating a progressive, modern, and free society in Iran.',
-    cover: `${A}/covers/bubjan.webp`,
-    poster: `${A}/posters/bubjan.webp`,
-    blockBg: `${A}/blocks/bubjan.webp`,
-    badges: [`${A}/blocks/bubjan-badges.webp`],
+    cover: v(`${A}/covers/bubjan.webp`),
+    poster: v(`${A}/posters/bubjan.webp`),
+    blockBg: v(`${A}/blocks/bubjan.webp`),
+    badges: [v(`${A}/blocks/bubjan-badges.webp`)],
     trailer: 'dzQ3zupU4QE',
     details: { Format: 'Documentary Short', Subject: 'Parwiz Zafari' },
   },
   {
     slug: 'river-of-spirits',
-    bar: `${A}/bars/river-of-spirits.svg`,
+    bar: v(`${A}/bars/river-of-spirits.svg`),
     title: 'RIVER OF SPIRITS',
     titleLines: ['RIVER OF', 'SPIRITS'],
     category: 'DOCUMENTARY FILM',
     kind: 'film',
     desc: 'River of Spirits is cultivating cultural and ecological renewal by reconnecting communities to waterways through restoration, education, and shared stewardship.',
-    cover: `${A}/covers/river-of-spirits.webp`,
-    poster: `${A}/posters/river-of-spirits.webp`,
-    blockBg: `${A}/blocks/river-of-spirits.webp`,
+    cover: v(`${A}/covers/river-of-spirits.webp`),
+    poster: v(`${A}/posters/river-of-spirits.webp`),
+    blockBg: v(`${A}/blocks/river-of-spirits.webp`),
     trailer: '/assets/trailer-river-of-spirits.mp4',
     trailerLocal: true,
     details: { Format: 'Documentary Film', Setting: 'Ecuadorian Amazon' },
@@ -244,10 +260,10 @@ export const PODCAST = {
   titleLines: ['HOW TO CHANGE', 'THE WORLD'],
   subtitle: 'PODCAST SERIES',
   desc: 'Produced with PRX, How to Change the World features provocative conversations with the heroes among us—mission-driven founders, artists, thought leaders, and those on the front lines building a better world.',
-  hero: `${A}/pages/podcast-hero.webp`,
+  hero: v(`${A}/pages/podcast-hero.webp`),
   /* Same exported caption bar the home stack and the case study use, in place
      of a live-text headline — see ProjectBlock.jsx. */
-  bar: `${A}/bars/how-to-change-the-world-podcast.svg`,
+  bar: v(`${A}/bars/how-to-change-the-world-podcast.svg`),
   cover: '/assets/poster-podcast.jpg',
   meta: [
     { label: 'FORMAT', value: 'Podcast Series' },
@@ -322,7 +338,7 @@ export const AWARDS = [
   { id: 'ojai-best-doc-short', alt: 'Ojai Film Festival 2023 — Winner, Best Documentary Short' },
   { id: 'slamdance-2024', alt: 'Slamdance Film Festival 2024' },
 ]
-  .map((a) => ({ ...a, src: `${A}/awards/${a.id}.webp` }))
+  .map((a) => ({ ...a, src: v(`${A}/awards/${a.id}.webp`) }))
   .sort((a, b) => {
     /* Lead-order entries first, in the order listed; everything else keeps its
        original sequence behind them. `indexOf` returns -1 for unlisted ids, so
