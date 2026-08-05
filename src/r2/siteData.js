@@ -49,17 +49,18 @@ export const SOCIALS = [
 
 /* --------------------------------------------------------------------------
    Hero — background photos cycle behind the fixed "WE MAKE GOOD COOL" plate.
-   Each is a B&W halftone laid over cream in multiply blend (matches Figma
-   section "Homepage HERO BG IMAGES", nodes 2408:921 … 2408:1216).
+   These are finished halftone artworks with the paper tone and the top/bottom
+   gradients already baked in, so they render as flat full-bleed images: no
+   multiply blend, no scrim, no grain layer on top. Each is anchored to the top
+   edge so the dark band that keeps the nav legible always stays in frame.
+   Shipped at 1440w with a 2880w @2x companion (sources are 2880×1600).
    -------------------------------------------------------------------------- */
-export const HERO_SLIDES = [
-  { id: 'bubjan', src: `${A}/hero/bubjan.webp`, alt: 'Still from Bubjan' },
-  { id: 'helenibelieve', src: `${A}/hero/helenibelieve.webp`, alt: 'Still from Helen | Believe' },
-  { id: 'shuffle', src: `${A}/hero/shuffle.webp`, alt: 'Still from Shuffle' },
-  { id: 'makaylas-voice', src: `${A}/hero/makaylas-voice.webp`, alt: "Still from Makayla's Voice" },
-  { id: 'river-of-spirits', src: `${A}/hero/river-of-spirits.webp`, alt: 'Still from River of Spirits' },
-  { id: 'voice-of-hind-rajab', src: `${A}/hero/voice-of-hind-rajab.webp`, alt: 'Still from Voice of Hind Rajab' },
-]
+export const HERO_SLIDES = [1, 2, 3, 4, 5, 6].map((n) => ({
+  id: `hero-${n}`,
+  src: `${A}/hero/hero-${n}.webp`,
+  srcSet: `${A}/hero/hero-${n}.webp 1440w, ${A}/hero/hero-${n}@2x.webp 2880w`,
+  alt: 'World Within Studios film still, halftone treatment',
+}))
 
 export const HERO_INTERVAL_MS = 2600
 

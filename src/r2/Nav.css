@@ -68,6 +68,17 @@
   .r2nav__menu-btn { font-size: 32px; }
 }
 
+/* Flush — used over a full-bleed hero, where the nav is measured off the
+   viewport rather than the 1440 content frame. Without it a 1512px window
+   pushes the logo out to 68px (36px of centring slack plus the gutter) while
+   the artwork behind bleeds to 0, so the hero reads as unevenly inset. Declared
+   after the breakpoints above so its `top` survives them; the small-screen
+   offsets stay as they were, since 32px of headroom is a lot on a phone. */
+.r2nav--flush { max-width: none; }
+@media (min-width: 901px) {
+  .r2nav--flush { top: var(--r2-gutter-nav); }
+}
+
 /* --------------------------------------------------------------------------
    Overlay
    -------------------------------------------------------------------------- */

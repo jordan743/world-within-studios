@@ -7,8 +7,10 @@ import './Nav.css'
  * R2 nav — logo left, MENU right (Figma component set 2430:3325).
  * `tone` maps to the three Figma variants: green (Default), cream (off-white),
  * and ink (BLACK) for use over light backgrounds.
+ * `flush` measures the nav off the viewport instead of the 1440 content frame,
+ * for pages whose hero bleeds edge to edge — see `.r2nav--flush`.
  */
-export default function Nav({ tone = 'green' }) {
+export default function Nav({ tone = 'green', flush = false }) {
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
   const closeRef = useRef(null)
@@ -44,7 +46,7 @@ export default function Nav({ tone = 'green' }) {
 
   return (
     <>
-      <header className={`r2nav r2nav--${tone}`}>
+      <header className={`r2nav r2nav--${tone}${flush ? ' r2nav--flush' : ''}`}>
         <Link to="/" className="r2nav__logo" aria-label="World Within Studios — home">
           <span className="r2logo" role="img" aria-label="World Within Studios" />
         </Link>

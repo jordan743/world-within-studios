@@ -10,53 +10,44 @@
   min-height: 520px;
   overflow: hidden;
   background: var(--r2-black);
-  isolation: isolate;
-}
-
-/* The cream "paper" the halftone prints onto (Figma 2346:1803, #fff4e2). */
-.r2hero__paper {
-  position: absolute;
-  inset: -6% 0;
-  background: var(--r2-cream);
-  overflow: hidden;
 }
 
 .r2hero__stills { position: absolute; inset: 0; }
 
+/* Flat, full-bleed, top-anchored. The artwork carries its own paper tone and
+   gradients, so there is deliberately no blend mode, wash, grain or scrim over
+   it — see Hero.jsx. Anchoring to the top keeps the baked-in dark band (which
+   is what makes the green nav legible) in frame at every viewport height. */
 .r2hero__still {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  mix-blend-mode: multiply;
+  object-position: top center;
   opacity: 0;
-  transform: rotate(-0.39deg) scale(1.04);
   transition: opacity 1.1s var(--r2-ease);
   will-change: opacity;
 }
 .r2hero__still.is-active { opacity: 1; }
 
-/* Black-to-transparent wash sitting over the still (Figma 2346:1808).
-   Pulled well back from the Figma values so the halftone reads bright. */
-.r2hero__gradient {
-  position: absolute;
-  inset: 2% -1.5%;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, rgba(0, 0, 0, 0.08) 26.86%, rgba(0, 0, 0, 0.08) 100%);
-  pointer-events: none;
-}
-
-/* Green headline plate — 861×200 at 2.21deg.
-   Centre lands at 35.2% / 75.7% of the hero frame (traced from Figma 2346:1865
-   through its parent offsets). left/top resolve against the frame; the
-   translate then re-centres on the plate itself. */
+/* Green headline plate — 861×200 at 2.21deg, pinned to the bottom-left 32px
+   margin. `--pw` is the plate width; the margins below cancel out the overhang
+   the tilt adds, so it is the *visible* edges that land on 32px:
+   the bottom-left corner juts left by (h/2)·sin2.21° = 0.448% of the width, and
+   the bottom-right corner drops by (w/2)·sin2.21° = 1.929% of it. Margin
+   percentages resolve against the container's width in both axes, so a single
+   multiple of `--pw` is correct for each and rescales with the breakpoints. */
 .r2hero__plate {
+  --pw: 59.8%;               /* 860.86 / 1440 */
   position: absolute;
-  left: 35.2%;
-  top: 75.7%;
-  width: 59.8%;              /* 860.86 / 1440 */
+  left: var(--r2-gutter);
+  bottom: var(--r2-gutter);
+  margin-left: calc(var(--pw) * 0.00448);
+  margin-bottom: calc(var(--pw) * 0.01929);
+  width: var(--pw);
   aspect-ratio: 860.86 / 199.98;
-  transform: translate(-50%, -50%) rotate(2.21deg);
+  transform: rotate(2.21deg);
   background: var(--r2-green);
   box-shadow: 4px 1.3px 5.3px rgba(0, 0, 0, 0.25);
   overflow: hidden;
@@ -74,26 +65,14 @@
   max-width: none;
 }
 
-/* Overall vertical scrim (Figma 2330:1331). */
-.r2hero__scrim {
-  position: absolute;
-  inset: 0;
-  background:
-    /* Top scrim so the green logo and MENU stay legible over a busy halftone */
-    linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.26) 9%, rgba(0, 0, 0, 0) 20%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0.04) 0%, rgba(0, 0, 0, 0.06) 55%, rgba(0, 0, 0, 0.5) 100%);
-  pointer-events: none;
-  z-index: 2;
-}
-
 @media (max-width: 900px) {
   .r2hero { height: 620px; }
-  .r2hero__plate { width: 80%; left: 46%; top: 72%; }
+  .r2hero__plate { --pw: 80%; }
 }
 
 @media (max-width: 600px) {
   .r2hero { height: 78svh; min-height: 460px; }
   /* The wordmark overhangs its plate by ~3%, and the 2.21deg tilt adds more —
      keep the plate narrow enough that neither clips at the viewport edge. */
-  .r2hero__plate { width: 82%; left: 50%; top: 70%; }
+  .r2hero__plate { --pw: 84%; }
 }
