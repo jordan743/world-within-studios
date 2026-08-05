@@ -1,8 +1,8 @@
-import { Fragment, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Nav from '../Nav.jsx'
 import Ticker from '../Ticker.jsx'
 import Footer from '../Footer.jsx'
-import { AWARDS, AWARD_NOMINATIONS } from '../siteData.js'
+import { AWARDS, AWARD_NOMINATIONS, NOMINATIONS_PROJECT } from '../siteData.js'
 import './Awards.css'
 
 function GridIcon() {
@@ -96,10 +96,65 @@ function useLaurelParallax(active) {
   return gridRef
 }
 
+/**
+ * Parks a label on the cursor while a laurel or a nomination logo is hovered.
+ *
+ * Position is written straight to the node's transform inside a rAF, same as
+ * the tilt above — only the *text* goes through React state, and that changes
+ * on enter/leave rather than on every mousemove.
+ *
+ * `content` is that text. It is a dependency because the clamp below measures
+ * the label, and the label only reaches its new size after React has committed
+ * the new text — placing on mousemove alone would clamp against the *previous*
+ * label's width and let a wider one hang off the edge.
+ */
+function useCursorLabel(content) {
+  const labelRef = useRef(null)
+  const pointerRef = useRef(null)
+
+  const place = useCallback(() => {
+    const el = labelRef.current
+    const pointer = pointerRef.current
+    if (!el || !pointer) return
+    /* The label trails below-right of the cursor, so against the right or
+       bottom edge — a nomination logo, the last laurel in a row — it would
+       otherwise hang off the page. EDGE is clearance past its own margin. */
+    const EDGE = 10
+    const x = Math.min(pointer.x, window.innerWidth - el.offsetWidth - EDGE - 18)
+    const y = Math.min(pointer.y, window.innerHeight - el.offsetHeight - EDGE - 16)
+    el.style.transform = `translate3d(${Math.max(0, x)}px, ${Math.max(0, y)}px, 0)`
+  }, [])
+
+  useEffect(() => {
+    if (window.matchMedia?.('(hover: none)').matches) return
+
+    let frame = 0
+    const run = () => { frame = 0; place() }
+    const onMove = (e) => {
+      pointerRef.current = { x: e.clientX, y: e.clientY }
+      if (!frame) frame = requestAnimationFrame(run)
+    }
+
+    window.addEventListener('mousemove', onMove, { passive: true })
+    return () => {
+      window.removeEventListener('mousemove', onMove)
+      if (frame) cancelAnimationFrame(frame)
+    }
+  }, [place])
+
+  // Re-clamp against the new label's measured size, before it paints.
+  useLayoutEffect(() => { place() }, [content, place])
+
+  return labelRef
+}
+
 /** Awards / Press — Figma 2425:1635, with a laurel/list view toggle. */
 export default function Awards() {
   const [view, setView] = useState('grid')
+  const [hovered, setHovered] = useState(null)
   const gridRef = useLaurelParallax(view === 'grid')
+  // Both views show the nominations, so the label is always live.
+  const labelRef = useCursorLabel(hovered)
 
   return (
     <div className="r2-page r2awards">
@@ -117,7 +172,7 @@ export default function Awards() {
                 type="button"
                 className={view === 'grid' ? 'is-active' : ''}
                 aria-pressed={view === 'grid'}
-                onClick={() => setView('grid')}
+                onClick={() => { setView('grid'); setHovered(null) }}
               >
                 <GridIcon />
                 <span className="r2-sr">Laurel view</span>
@@ -126,7 +181,7 @@ export default function Awards() {
                 type="button"
                 className={view === 'list' ? 'is-active' : ''}
                 aria-pressed={view === 'list'}
-                onClick={() => setView('list')}
+                onClick={() => { setView('list'); setHovered(null) }}
               >
                 <ListIcon />
                 <span className="r2-sr">List view</span>
@@ -137,21 +192,24 @@ export default function Awards() {
           {/* Headline nominations — Figma 2489:1360. Below the count rule and
               directly above the laurels, and held across both views since it
               reads as a standing claim about the slate rather than another row
-              of the collection. The line breaks are authored, not wrapped: each
-              group is set as two centred lines in the design. */}
+              of the collection. The awarding bodies' own logos now, in place of
+              the set-in-type version; what that type said moves to the cursor
+              label on hover and to each logo's alt text. */}
           <section className="r2awards__nominations" aria-label="Headline nominations">
             {AWARD_NOMINATIONS.map((n) => (
-              <div key={n.id} className="r2awards__nom">
-                <p className="r2awards__nom-title">
-                  {n.title.map((line, i) => (
-                    <Fragment key={line}>{i ? <br /> : null}{line}</Fragment>
-                  ))}
-                </p>
-                <p className="r2awards__nom-cat">
-                  {n.category.map((line, i) => (
-                    <Fragment key={line}>{i ? <br /> : null}{line}</Fragment>
-                  ))}
-                </p>
+              <div
+                key={n.id}
+                className="r2awards__nom"
+                style={{ '--w': n.width, '--mw': n.mobileWidth, '--ratio': n.ratio }}
+                onMouseEnter={() => setHovered({ lines: n.category, note: NOMINATIONS_PROJECT })}
+                onMouseLeave={() => setHovered(null)}
+              >
+                <img
+                  src={n.logo}
+                  alt={`${n.body} nominee — ${n.category.join(' ')}, ${NOMINATIONS_PROJECT}`}
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
             ))}
           </section>
@@ -159,7 +217,11 @@ export default function Awards() {
           {view === 'grid' ? (
             <ul className="r2awards__grid" ref={gridRef}>
               {AWARDS.map((a) => (
-                <li key={a.id}>
+                <li
+                  key={a.id}
+                  onMouseEnter={a.project ? () => setHovered({ lines: [a.project] }) : undefined}
+                  onMouseLeave={a.project ? () => setHovered(null) : undefined}
+                >
                   <img src={a.src} alt={a.alt} loading="lazy" decoding="async" />
                 </li>
               ))}
@@ -172,11 +234,32 @@ export default function Awards() {
                   <li key={a.id}>
                     <span className="r2awards__festival">{festival}</span>
                     <span className="r2awards__distinction">{distinction}</span>
+                    {/* Omitted entirely when unattributed — an empty span would
+                        still take a row once the columns stack on mobile. */}
+                    {a.project ? <span className="r2awards__project">{a.project}</span> : null}
                   </li>
                 )
               })}
             </ul>
           )}
+
+          {/* Cursor label — the winning project over a laurel, the award
+              category over a nomination logo. Rendered in both views because
+              the nominations are, and outside the grid so the laurels' 3D
+              transforms don't drag it into their perspective. Hidden outright
+              on touch, where there is no hover to drive it. */}
+          <div
+            ref={labelRef}
+            className={`r2awards__cursor${hovered ? ' is-on' : ''}`}
+            aria-hidden="true"
+          >
+            {hovered?.lines.map((line) => (
+              <span key={line} className="r2awards__cursor-line">{line}</span>
+            ))}
+            {hovered?.note ? (
+              <span className="r2awards__cursor-note">{hovered.note}</span>
+            ) : null}
+          </div>
         </section>
 
         <Ticker />

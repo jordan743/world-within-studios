@@ -34,7 +34,10 @@ export const v = (path) => `${path}?v=${ASSET_V}`
    Restoring them means adding the routes back *and* the entries here.
    -------------------------------------------------------------------------- */
 export const NAV_ITEMS = [
-  { label: 'FILM & TELEVISION', to: '/film-tv' },
+  /* `mobileLines` is an authored break for the menu overlay only — the longest
+     label sets the type size for every item, so breaking this one lets them all
+     run bigger on a phone. Desktop still reads it as one line. */
+  { label: 'FILM & TELEVISION', to: '/film-tv', mobileLines: ['FILM &', 'TELEVISION'] },
   { label: 'PODCAST', to: '/podcast' },
   { label: 'AWARDS / PRESS', to: '/awards' },
   { label: 'GET IN TOUCH', to: '/contact' },
@@ -292,11 +295,50 @@ export const ALL_EPISODES = YT_FEED.episodes
    Awards / Press — laurels sliced from Figma rows 2425:1791 … 2425:1795
    -------------------------------------------------------------------------- */
 /* Headline nominations, called out above the laurels — Figma 2489:1360. */
+/* Headline nominations — Figma 2489:1360, the awarding bodies' own logos in
+ * place of the set-in-type version they replaced. All three are for The Voice
+ * of Hind Rajab. `category` was the second line of that old block and is now
+ * the cursor label on hover; it stays in the alt text too, so replacing text
+ * with artwork doesn't cost a screen reader the information.
+ *
+ * `width` is the Figma width as a share of the 1376px inner row, which keeps
+ * the three logos in the relative scale they were drawn at. Heights follow from
+ * each logo's own aspect ratio — they are deliberately unequal. `mobileWidth`
+ * is the same ratio rescaled so the widest logo nearly fills a stacked phone
+ * column, since the desktop shares would leave all three tiny.
+ */
 export const AWARD_NOMINATIONS = [
-  { id: 'golden-globe', title: ['GOLDEN GLOBE®', 'NOMINEE'], category: ['BEST MOTION PICTURE,', 'NON-ENGLISH LANGUAGE'] },
-  { id: 'academy-award', title: ['ACADEMY AWARD®', 'NOMINEE'], category: ['BEST INTERNATIONAL', 'FEATURE FILM'] },
-  { id: 'bafta', title: ['BAFTA®', 'NOMINEE'], category: ['FILM NOT IN THE', 'ENGLISH LANGUAGE'] },
+  {
+    id: 'academy-award',
+    body: 'Academy Award',
+    logo: v(`${A}/nominations/oscars.svg`),
+    ratio: 317.073 / 64.664,
+    width: '23.04%',
+    mobileWidth: '88%',
+    category: ['BEST INTERNATIONAL', 'FEATURE FILM'],
+  },
+  {
+    id: 'golden-globe',
+    body: 'Golden Globe',
+    logo: v(`${A}/nominations/golden-globe.webp`),
+    ratio: 230.951 / 214.761,
+    width: '16.78%',
+    mobileWidth: '64%',
+    category: ['BEST MOTION PICTURE,', 'NON-ENGLISH LANGUAGE'],
+  },
+  {
+    id: 'bafta',
+    body: 'BAFTA',
+    logo: v(`${A}/nominations/bafta.webp`),
+    ratio: 300.336 / 97.649,
+    width: '21.83%',
+    mobileWidth: '83%',
+    category: ['FILM NOT IN THE', 'ENGLISH LANGUAGE'],
+  },
 ]
+
+/** Every headline nomination is for this film. */
+export const NOMINATIONS_PROJECT = 'The Voice of Hind Rajab'
 
 /* The festivals the user wants leading both views, in this order. Anything not
    named here keeps its original position and falls in behind Washington West. */
@@ -312,29 +354,35 @@ const AWARDS_LEAD_ORDER = [
   'washington-west-2023',
 ]
 
+/* `project` is the WWP title the laurel was won for — surfaced as a cursor
+   label in the laurel view and as the third column in the list view. Entries
+   still awaiting an answer from the client carry no `project` key at all, and
+   both views simply omit the column for them rather than printing "TBD". */
 export const AWARDS = [
-  { id: 'sxsw-shuffle', alt: 'SXSW Film & TV Festival 2025 — Documentary Feature Jury Award Winner' },
+  { id: 'sxsw-shuffle', alt: 'SXSW Film & TV Festival 2025 — Documentary Feature Jury Award Winner', project: 'Shuffle' },
   { id: 'anthem-2025', alt: 'Anthem Awards 2025 — Silver Winner' },
-  { id: 'docutah-2024', alt: 'DocUtah International Film Festival 2024 — Best Short' },
-  { id: 'venice-shorts', alt: 'Venice Shorts Film Awards — Award Winner' },
-  { id: 'anthem-persian', alt: 'Anthem Persian Film Festival 2024 — Winner' },
-  { id: 'big-sky-2024', alt: 'Big Sky Documentary Film Festival 2024 — Official Selection' },
+  { id: 'docutah-2024', alt: 'DocUtah International Film Festival 2024 — Best Short', project: 'Bubjan' },
+  { id: 'venice-shorts', alt: 'Venice Shorts Film Awards — Award Winner', project: 'Bubjan' },
+  { id: 'anthem-persian', alt: 'Anthem Persian Film Festival 2024 — Winner', project: 'Bubjan' },
+  { id: 'big-sky-2024', alt: 'Big Sky Documentary Film Festival 2024 — Official Selection', project: 'Bubjan' },
   { id: 'hollywood-shorts-editing', alt: 'Hollywood Shorts Fest — Winner, Best Editing' },
-  { id: 'hmma-bubjan', alt: 'Hollywood Music in Media Awards — Official Winner, Bubjan' },
-  { id: 'dcdox-2023', alt: 'DC/DOX Film Festival 2023' },
-  { id: 'docnyc-2023', alt: 'DOC NYC 2023 — Official Selection' },
+  { id: 'hmma-bubjan', alt: 'Hollywood Music in Media Awards — Official Winner, Bubjan', project: 'Bubjan' },
+  { id: 'dcdox-2023', alt: 'DC/DOX Film Festival 2023', project: 'Bubjan' },
+  { id: 'docnyc-2023', alt: 'DOC NYC 2023 — Official Selection', project: 'Bubjan' },
   { id: 'global-peace-2024', alt: 'Global Peace Film Festival 2024 — Official Selection' },
   { id: 'hollywood-shorts-selection', alt: 'Hollywood Shorts Fest — Official Selection' },
-  { id: 'phoenix-2023', alt: 'Phoenix Film Festival 2023 — Official Selection' },
-  { id: 'washington-west-2023', alt: 'Washington West Film Festival 2023 — Official Selection' },
+  { id: 'phoenix-2023', alt: 'Phoenix Film Festival 2023 — Official Selection', project: 'Helen | Believe' },
+  { id: 'washington-west-2023', alt: 'Washington West Film Festival 2023 — Official Selection', project: 'Helen | Believe' },
   { id: 'idn-nominee-2025', alt: 'IDN Documentary Awards 2025 — Best Original Music Score Nominee' },
-  { id: 'signal-silver-2023', alt: 'Signal Awards 2023 — Silver Winner' },
-  { id: 'gasparilla-2023', alt: 'Gasparilla International Film Festival 2023 — Official Selection' },
+  /* Not one of the titles above — the Alex Miller podcast has no page on the
+     site, so this name is display-only and links nowhere. */
+  { id: 'signal-silver-2023', alt: 'Signal Awards 2023 — Silver Winner', project: 'Alex Miller Podcast' },
+  { id: 'gasparilla-2023', alt: 'Gasparilla International Film Festival 2023 — Official Selection', project: 'Helen | Believe' },
   { id: 'ojai-2023', alt: 'Ojai Film Festival 2023 — Official Selection' },
   { id: 'la-audience-award', alt: 'Los Angeles Diversity Film Festival 2023 — Audience Award Winner' },
   { id: 'climate-film-2025', alt: 'Climate Film Festival 2025 — Official Selection' },
-  { id: 'indy-film-2023', alt: 'Indy Film Fest 2023 — Official Selection' },
-  { id: 'santa-barbara', alt: 'Santa Barbara International Film Festival — Official Selection' },
+  { id: 'indy-film-2023', alt: 'Indy Film Fest 2023 — Official Selection', project: 'Helen | Believe' },
+  { id: 'santa-barbara', alt: 'Santa Barbara International Film Festival — Official Selection', project: 'Helen | Believe' },
   { id: 'ojai-best-doc-short', alt: 'Ojai Film Festival 2023 — Winner, Best Documentary Short' },
   { id: 'slamdance-2024', alt: 'Slamdance Film Festival 2024' },
 ]

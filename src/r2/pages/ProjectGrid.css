@@ -14,11 +14,13 @@
   .r2grid { grid-template-columns: repeat(3, 1fr); gap: 36px 9px; }
 }
 
+/* One project per row on mobile — two-up left the posters and their captions
+   too small to read on a phone. */
 @media (max-width: 760px) {
   .r2grid-section { padding-block: 40px 52px; }
-  .r2grid { grid-template-columns: repeat(2, 1fr); gap: 28px 9px; }
+  .r2grid { grid-template-columns: 1fr; gap: 40px; }
 }
 
 @media (max-width: 420px) {
-  .r2grid { gap: 26px 8px; }
+  .r2grid { gap: 34px; }
 }

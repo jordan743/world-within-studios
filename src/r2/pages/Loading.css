@@ -12,6 +12,12 @@
 }
 .r2loading.is-leaving { opacity: 0; }
 
+.r2loading__pic {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .r2loading__wall {
   width: 100%;
   height: 100%;
@@ -26,8 +32,6 @@
   to   { opacity: 1; transform: none; }
 }
 
-/* Portrait phones: the wall is a 16:9 landscape composition, so bias the crop
-   toward the centred logo card rather than letting the sides win. */
-@media (max-aspect-ratio: 3 / 4) {
-  .r2loading__wall { object-position: 50% 50%; transform-origin: center; }
-}
+/* Portrait phones used to bias the landscape wall's crop toward the centred
+   logo card. They now get the portrait composition outright — see the <picture>
+   in Loading.jsx — so there is nothing left to compensate for. */

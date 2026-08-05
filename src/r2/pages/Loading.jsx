@@ -47,7 +47,20 @@ export default function Loading({ hold = 2400 }) {
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') skip() }}
       aria-label="Enter World Within Productions"
     >
-      <img className="r2loading__wall" src={v("/assets/r2/pages/loading-intro.webp")} alt="World Within Productions" />
+      {/* Two authored compositions rather than one crop: the 1440×810 wall has
+          nowhere to go on a phone, so portrait gets its own 390×810 frame
+          (Figma 2508:2903) with the tiles restacked 2-up. */}
+      <picture className="r2loading__pic">
+        <source
+          srcSet={v('/assets/r2/pages/loading-intro-mobile.webp')}
+          media="(max-width: 700px)"
+        />
+        <img
+          className="r2loading__wall"
+          src={v('/assets/r2/pages/loading-intro.webp')}
+          alt="World Within Productions"
+        />
+      </picture>
     </div>
   )
 }

@@ -27,12 +27,8 @@
   display: block;
   margin: 0;
 }
-.r2cs__bar img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1440 / 238;
-}
+/* Sizing and the mobile split live in CaptionBar.css — a descendant `img` rule
+   here would out-specify them and strand the wide bar on phones. */
 
 /* 2px up on the shared body-copy ramp, at both ends of the clamp. Compound
    selector so it beats `.r2-body-copy` regardless of stylesheet order, and
@@ -72,6 +68,7 @@
 .r2cs__poster {
   width: 100%;
   overflow: hidden;
+  border-radius: 8px;
   background: var(--r2-black);
 }
 .r2cs__poster img { width: 100%; height: auto; display: block; }
@@ -165,7 +162,8 @@
     gap: 34px;
     padding-block: 44px 52px;
   }
-  .r2cs__poster { max-width: 280px; }
+  /* Capped width would otherwise leave the poster pinned to the left gutter. */
+  .r2cs__poster { max-width: 280px; margin-inline: auto; }
 }
 
 @media (max-width: 600px) {

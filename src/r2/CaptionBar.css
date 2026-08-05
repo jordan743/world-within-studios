@@ -1,0 +1,44 @@
+/* ==========================================================================
+   Exported caption bar — the 1440×238 title/category plate from Figma
+   ========================================================================== */
+
+.r2bar__full {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1440 / 238;
+}
+
+.r2bar__stack { display: none; }
+
+/* --- Mobile: one panel per row -------------------------------------------- */
+/* Side by side, the two panels leave the type far too small on a phone. Every
+   exported bar is built to the same grid — a 842.937px title panel followed by
+   a 597px category panel across 1440 — so each panel can be cropped back out of
+   the one asset with background-size/position instead of shipping split files.
+
+     title  scale 1440/842.937 = 170.83%, pinned left
+     tag    scale 1440/597     = 241.21%, pinned right
+
+   Both rows take the title panel's natural aspect, so the lettering stays the
+   same height in each. That leaves the tag stretched horizontally by ~1.41x,
+   which sits fine with type that is optically stretched to its panel already —
+   and it keeps the title, the more important half, undistorted.
+
+   The stretch needs `preserveAspectRatio="none"` on the bar SVGs themselves —
+   without it they letterbox inside a mismatched background-size instead of
+   filling it. Every other place a bar renders pins it to its native 1440/238,
+   so that attribute changes nothing but this. */
+@media (max-width: 640px) {
+  .r2bar__full { display: none; }
+  .r2bar__stack { display: block; }
+
+  .r2bar__panel {
+    width: 100%;
+    aspect-ratio: 842.937 / 238;
+    background-image: var(--bar);
+    background-repeat: no-repeat;
+  }
+  .r2bar__panel--title { background-size: 170.83% 100%; background-position: left top; }
+  .r2bar__panel--tag   { background-size: 241.21% 100%; background-position: right top; }
+}

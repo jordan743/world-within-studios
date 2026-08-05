@@ -22,7 +22,8 @@
   border: 0;
 }
 
-/* YouTube iframes can't be object-fit — scale the 16:9 frame to cover instead. */
+/* YouTube iframes can't be object-fit — scale the 16:9 frame to cover instead.
+   Poster state only; once playing, `.is-playing` below fits it instead. */
 .r2trailer__frame {
   inset: 50% auto auto 50%;
   translate: -50% -50%;
@@ -31,6 +32,34 @@
   min-height: 100%;
   min-width: 177.78vh;      /* …and against its own height */
   object-fit: unset;
+}
+
+/* --- Playing: fit the player, never crop it ------------------------------- */
+/* The poster is art-directed to a 1440/750 crop (4:3 on mobile), but a player
+   is not artwork — cropping a 16:9 frame into either of those cuts off the
+   bottom edge, and that is where the scrubber, the volume control and the
+   fullscreen button live. So on play the hero becomes a fitted 16:9 box:
+   as wide as the page allows, and never taller than the poster's own cap.
+   The min() pair is a 16:9 rectangle fitted into 100vw x 84svh — whichever
+   axis binds, the other follows, so nothing is ever clipped. */
+.r2trailer.is-playing {
+  aspect-ratio: auto;
+  height: min(56.25vw, 84svh);
+  max-height: none;
+  display: grid;
+  place-items: center;
+}
+
+.r2trailer.is-playing .r2trailer__media {
+  position: relative;
+  inset: auto;
+  translate: none;
+  width: min(100%, calc(84svh * 16 / 9));
+  height: 100%;
+  /* Letterboxes a trailer that isn't exactly 16:9 rather than cropping it. */
+  object-fit: contain;
+  min-width: 0;
+  min-height: 0;
 }
 
 .r2trailer__poster {

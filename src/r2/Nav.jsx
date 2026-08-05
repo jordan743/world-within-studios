@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { MENU_ITEMS, EXTERNAL_LINK } from './siteData.js'
 import './Nav.css'
@@ -87,7 +87,18 @@ export default function Nav({ tone = 'green' }) {
               style={{ '--i': i }}
               onClick={handleClose}
             >
-              <span>{item.label}</span>
+              {/* The <br> is display:none above the mobile breakpoint, so the
+                  space beside it closes the label back into one line there. */}
+              <span>
+                {item.mobileLines
+                  ? item.mobileLines.map((line, li) => (
+                      <Fragment key={line}>
+                        {li ? <><br className="r2menu__wrap" />{' '}</> : null}
+                        {line}
+                      </Fragment>
+                    ))
+                  : item.label}
+              </span>
             </Link>
           ))}
         </nav>

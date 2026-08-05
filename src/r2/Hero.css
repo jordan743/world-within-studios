@@ -2,11 +2,15 @@
    Home hero — Figma 2330:1329 (1440×800)
    ========================================================================== */
 
+/* 94svh at every width. It was a flat 800px, which on anything taller than that
+   left the hero short of the fold — the wider the screen, the more obviously.
+   svh, not vh: vh resolves against the *large* viewport, so on a phone a 94vh
+   hero would sit under the browser chrome until the user scrolls. On desktop
+   the two are the same. */
 .r2hero {
   position: relative;
   width: 100%;
-  height: 800px;
-  max-height: 100svh;
+  height: 94svh;
   min-height: 520px;
   overflow: hidden;
   background: var(--r2-black);
@@ -71,12 +75,13 @@
 }
 
 @media (max-width: 900px) {
-  .r2hero { height: 620px; }
+  /* Height comes from the 94svh base — only the plate rescales here. */
   .r2hero__plate { --pw: 80%; }
 }
 
 @media (max-width: 600px) {
-  .r2hero { height: 78svh; min-height: 460px; }
+  /* Only the floor changes on a phone — the height itself is the shared base. */
+  .r2hero { min-height: 460px; }
   /* The wordmark overhangs its plate by ~3%, and the 2.21deg tilt adds more —
      keep the plate narrow enough that neither clips at the viewport edge. */
   .r2hero__plate { --pw: 84%; }

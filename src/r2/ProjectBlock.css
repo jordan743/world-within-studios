@@ -41,14 +41,7 @@
 }
 
 /* --- Caption bar ---------------------------------------------------------- */
-/* Exported straight from Figma, so it scales as one piece and keeps the
-   optically-stretched lettering intact. */
-.r2block__bar {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1440 / 238;
-}
+/* Lives in CaptionBar.jsx / CaptionBar.css, shared with the case study pages. */
 
 @media (max-width: 640px) {
   .r2block__media { aspect-ratio: 16 / 10; }

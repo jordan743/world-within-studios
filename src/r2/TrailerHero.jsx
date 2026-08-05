@@ -9,8 +9,13 @@ import './TrailerHero.css'
  * objection. Once started, both give the viewer real transport controls: the
  * local file gets the browser's native `controls`, YouTube gets its own chrome.
  *
- * The local file also stays unmuted and doesn't loop. It only plays on a click,
- * so there's no autoplay policy to satisfy and no reason to silence it.
+ * Both start muted; sound is the viewer's call, made through those controls.
+ * Muting also means the play() below can't be refused, so the click always
+ * results in a playing video.
+ *
+ * CaseStudy.jsx keys this on the slug — Router keeps the page mounted when you
+ * move between case studies, so without that a started trailer would carry
+ * `playing` into the next one and greet it mid-stream.
  */
 export default function TrailerHero({ project }) {
   const { title, trailer, trailerLocal, heroStill, blockBg } = project
@@ -31,17 +36,20 @@ export default function TrailerHero({ project }) {
     setPlaying(true)
     if (!trailerLocal) return
     requestAnimationFrame(() => {
-      /* Unmuted playback can still be refused if the browser doesn't count the
-         click as user activation. Swallow it: the element already has native
-         controls, so a refusal just leaves a paused video the viewer can start
-         themselves, rather than an unhandled rejection. */
+      /* Muted playback is never refused, but swallow a rejection anyway: the
+         element has native controls, so the fallback is a paused video the
+         viewer can start themselves rather than an unhandled rejection. */
       videoRef.current?.play().catch(() => {})
     })
   }
 
   if (playing) {
     return (
-      <section className="r2trailer">
+      /* `is-playing` drops the poster's cinematic crop for a fitted 16:9 box.
+         Covering a 1.92:1 (or 4:3 on mobile) frame scales the player past the
+         container and clips its bottom edge — which is exactly where the
+         transport controls and the fullscreen button sit. */
+      <section className="r2trailer is-playing">
         {trailerLocal ? (
           <video
             ref={videoRef}
@@ -49,6 +57,7 @@ export default function TrailerHero({ project }) {
             src={trailer}
             poster={poster}
             controls
+            muted
             playsInline
             preload="metadata"
             aria-label={`${title} trailer`}
@@ -56,7 +65,7 @@ export default function TrailerHero({ project }) {
         ) : (
           <iframe
             className="r2trailer__media r2trailer__frame"
-            src={`https://www.youtube-nocookie.com/embed/${trailer}?autoplay=1&rel=0&modestbranding=1`}
+            src={`https://www.youtube-nocookie.com/embed/${trailer}?autoplay=1&mute=1&rel=0&modestbranding=1`}
             title={`${title} trailer`}
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

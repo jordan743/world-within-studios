@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import CaptionBar from './CaptionBar.jsx'
 import './ProjectBlock.css'
 
 /**
@@ -30,13 +31,9 @@ export default function ProjectBlock({ project, eager = false }) {
         ) : null}
       </div>
 
-      <img
-        className="r2block__bar"
-        src={bar}
-        alt={`${title} — ${category}`}
-        loading={eager ? 'eager' : 'lazy'}
-        decoding="async"
-      />
+      {/* The link's aria-label already carries the wording, so the bar's own
+          alt would just repeat it — hence the empty string. */}
+      <CaptionBar src={bar} alt="" eager={eager} />
     </Link>
   )
 }

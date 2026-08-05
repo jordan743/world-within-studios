@@ -40,8 +40,8 @@
   list-style: none;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  /* Extra breathing room above the first row — the list view keeps the
-     tighter spacing off the toggle bar. */
+  /* Breathing room under the nominations block — see .r2awards__list for the
+     matching offset, so the two views start at a comparable distance. */
   margin-top: 100px;
   gap: 64px 40px;
   align-items: center;
@@ -74,10 +74,16 @@
 }
 
 /* --- List view ------------------------------------------------------------ */
-.r2awards__list { list-style: none; }
+/* Slightly under the laurel grid's 100px: the first row here is a rule with
+   text on it rather than a floating laurel, so it needs less air to clear the
+   nominations above it. */
+.r2awards__list {
+  list-style: none;
+  margin-top: 76px;
+}
 .r2awards__list li {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr) minmax(0, 0.8fr);
   gap: 24px;
   align-items: baseline;
   padding: 15px 0;
@@ -96,59 +102,108 @@
   line-height: 1.45;
   color: var(--r2-green);
 }
-
-/* --- Headline nominations — Figma 2489:1360 --------------------------------
-   Three groups spread across the row, each set centred over two authored
-   lines. Nested inside `.r2awards__body`, so the frame and gutter come from
-   that wrapper rather than being declared again here. Figma's -1.44px on 36px
-   and -1.12px on 28px are the same -0.04em, so one value covers both as they
-   scale down. */
-.r2awards__nominations {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 32px;
-  padding-block: 44px 40px;
-  /* An extra gutter on top of the wrapper's, so the outer two groups are
-     inset from the laurel grid's edges rather than flush with them. */
-  padding-inline: var(--r2-gutter);
-  text-align: center;
-}
-
-.r2awards__nom {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.r2awards__nom-title,
-.r2awards__nom-cat {
-  font-family: var(--r2-display);
-  letter-spacing: -0.04em;
-  line-height: 0.92;
+/* Which title the laurel was won for. Set quieter than the other two — it is
+   the answer to a question you only ask once you've read the row. */
+.r2awards__project {
+  font-size: 13px;
+  letter-spacing: 0.045em;
   text-transform: uppercase;
-  margin: 0;
-}
-.r2awards__nom-title {
-  font-weight: 700;
-  font-size: clamp(20px, 2.5vw, 36px);
-  color: var(--r2-green);
-}
-.r2awards__nom-cat {
-  font-weight: 500;
-  font-size: clamp(15px, 1.95vw, 28px);
   color: var(--r2-cream-55);
 }
 
-/* Below the laurel grid's own two-column breakpoint the three groups no longer
-   fit side by side — stack them and let each run as one centred column. */
+/* --- Cursor label ---------------------------------------------------------- */
+/* Fixed and pointer-events:none so it rides above the page without ever
+   landing under the cursor and flickering the hover it depends on. The margin
+   trails it off the pointer; the transform is written by the rAF in Awards.jsx.
+   Carries a project name over a laurel (one line) or an award category over a
+   nomination logo (two authored lines), so it has to sit right either way. */
+.r2awards__cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;
+  margin: 16px 0 0 18px;
+  padding: 9px 16px 10px;
+  /* Not a stadium: at three lines the radius would be half the pill's height,
+     and those big round ends crowd the type in from both sides. */
+  border-radius: 12px;
+  background: var(--r2-green);
+  color: var(--r2-black);
+  font-family: var(--r2-display);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  line-height: 1.24;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.16s var(--r2-ease);
+}
+.r2awards__cursor.is-on { opacity: 1; }
+
+.r2awards__cursor-line { display: block; }
+/* The film the award is for. Set back from the category above it so the pill
+   reads as one statement rather than three equal lines. */
+.r2awards__cursor-note {
+  display: block;
+  margin-top: 3px;
+  font-weight: 500;
+  opacity: 0.68;
+}
+
+/* No hover to drive it on touch — the list view carries the attribution there. */
+@media (hover: none) {
+  .r2awards__cursor { display: none; }
+}
+
+/* --- Headline nominations — Figma 2489:1360 --------------------------------
+   The three awarding bodies' logos, spread across the row. Widths come from the
+   design as a share of its 1376px inner row, so the logos keep the relative
+   scale they were drawn at; each height follows from its own aspect ratio, and
+   they are deliberately unequal. Nested inside `.r2awards__body`, so the frame
+   and gutter come from that wrapper rather than being declared again here. */
+.r2awards__nominations {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  padding-block: 44px 40px;
+  /* An extra gutter on top of the wrapper's, so the outer two logos are inset
+     from the laurel grid's edges rather than flush with them. */
+  padding-inline: var(--r2-gutter);
+}
+
+.r2awards__nom {
+  flex: none;
+  width: var(--w);
+  aspect-ratio: var(--ratio);
+  transition: opacity 0.25s var(--r2-ease);
+}
+.r2awards__nom img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+/* Hovering one dims the other two, so the cursor label reads as belonging to
+   the logo under the pointer rather than to the row. */
+@media (hover: hover) {
+  .r2awards__nominations:hover .r2awards__nom { opacity: 0.4; }
+  .r2awards__nominations .r2awards__nom:hover { opacity: 1; }
+}
+
+/* Below the laurel grid's own two-column breakpoint the three logos no longer
+   fit side by side — stack and centre them, and swap to the mobile widths so
+   they fill a phone column instead of shrinking to a third of it. */
 @media (max-width: 700px) {
   .r2awards__nominations {
     flex-direction: column;
     align-items: center;
-    gap: 26px;
+    gap: 44px;
     padding-block: 32px 40px;
   }
+  .r2awards__nom { width: var(--mw); }
 }
 
 @media (max-width: 1024px) {
@@ -157,9 +212,13 @@
 
 @media (max-width: 760px) {
   .r2awards__head { padding-top: 110px; }
-  .r2awards__body { padding-block: 32px 172px; }
+  .r2awards__body { padding-block: 32px 72px; }
   .r2awards__grid { grid-template-columns: repeat(3, 1fr); gap: 40px 24px; }
   .r2awards__grid img { height: clamp(58px, 13vw, 96px); }
+  /* Both views pull up close to the nominations on a phone — the desktop
+     offsets read as a dead screenful once everything is stacked. */
+  .r2awards__grid { margin-top: 40px; }
+  .r2awards__list { margin-top: 40px; }
   .r2awards__list li {
     grid-template-columns: 1fr;
     gap: 5px;
@@ -169,5 +228,12 @@
 
 @media (max-width: 460px) {
   .r2awards__head { padding-top: 92px; }
-  .r2awards__grid { grid-template-columns: repeat(2, 1fr); gap: 34px 20px; }
+  /* Two columns still, but capped and centred — across the full width the pair
+     lands at the quarter points and reads as two stray edges, not a block. */
+  .r2awards__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 34px 20px;
+    max-width: 300px;
+    margin-inline: auto;
+  }
 }

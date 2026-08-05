@@ -61,12 +61,12 @@
 
 @media (max-width: 900px) {
   .r2nav { top: 22px; }
-  .r2nav__logo { width: 124px; }
+  .r2nav__logo { width: 155px; }
   .r2nav__menu-btn { font-size: 40px; }
 }
 @media (max-width: 600px) {
   .r2nav { top: 18px; }
-  .r2nav__logo { width: 104px; }
+  .r2nav__logo { width: 130px; }
   .r2nav__menu-btn { font-size: 32px; }
 }
 
@@ -167,6 +167,9 @@
 .r2menu__link:hover,
 .r2menu__link:focus-visible { color: var(--r2-green); }
 
+/* Authored mobile-only break — see MENU_ITEMS.mobileLines in siteData.js. */
+.r2menu__wrap { display: none; }
+
 @keyframes r2menu-in {
   to { opacity: 1; transform: none; }
 }
@@ -191,15 +194,23 @@
 
 @media (max-width: 900px) {
   .r2menu__bar { padding-top: 22px; color: var(--r2-green); }
-  .r2menu__logo { width: 124px; }
+  /* Must track .r2nav__logo exactly, or the logo shifts when the menu opens. */
+  .r2menu__logo { width: 155px; }
   .r2menu__close { font-size: 40px; }
   .r2menu__links { gap: 6px; }
 }
 @media (max-width: 600px) {
   .r2menu__bar { padding-top: 18px; }
-  .r2menu__logo { width: 104px; }
+  .r2menu__logo { width: 130px; }
   .r2menu__close { font-size: 32px; }
-  .r2menu__link { font-size: clamp(28px, 9vw, 44px); line-height: 1.02; }
+  /* With FILM & TELEVISION broken in two, AWARDS / PRESS is the widest line and
+     is what caps this — 11vw is the largest that still holds it to one line at
+     360px, the narrowest phone worth designing for. */
+  .r2menu__link { font-size: clamp(34px, 11vw, 54px); line-height: 1.02; }
+  .r2menu__wrap { display: block; }
+  /* Wide enough that the break inside FILM & TELEVISION reads as one item
+     wrapping rather than as another gap between two. */
+  .r2menu__links { gap: 26px; }
   .r2menu__foot { padding-bottom: 28px; }
 }
 

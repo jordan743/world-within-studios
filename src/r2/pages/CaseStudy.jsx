@@ -1,6 +1,7 @@
 import { useParams, Navigate, Link } from 'react-router-dom'
 import Nav from '../Nav.jsx'
 import TrailerHero from '../TrailerHero.jsx'
+import CaptionBar from '../CaptionBar.jsx'
 import Ticker from '../Ticker.jsx'
 import Footer from '../Footer.jsx'
 import { projectBySlug, FILM_PROJECTS, v } from '../siteData.js'
@@ -20,7 +21,11 @@ export default function CaseStudy() {
     <div className="r2-page">
       <Nav tone="green" />
       <main>
-        <TrailerHero project={project} />
+        {/* Keyed by slug so the rail at the bottom of the page remounts it.
+            Router keeps this component mounted when you move between case
+            studies, and without the key a trailer you started on one page
+            arrived already playing on the next. */}
+        <TrailerHero key={project.slug} project={project} />
 
         {/* The same exported caption bar the home stack uses, carrying the
             title and category as artwork instead of live text — the lettering
@@ -28,7 +33,7 @@ export default function CaseStudy() {
             matches it. It stays the page's <h1>: the alt text is the heading's
             accessible name, so the document outline is unchanged. */}
         <h1 className="r2cs__bar">
-          <img src={bar} alt={`${title} — ${category}`} fetchPriority="high" />
+          <CaptionBar src={bar} alt={`${title} — ${category}`} eager />
         </h1>
 
         <section className="r2-wrap r2cs__intro">
