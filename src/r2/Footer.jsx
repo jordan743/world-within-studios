@@ -66,7 +66,7 @@ export default function Footer() {
         <img
           className="r2footer__lockup"
           src="/assets/r2/footer/playbill-lockup.svg"
-          alt="World Within Studios presents"
+          alt="World Within Productions presents"
         />
         <span className="r2-grain" aria-hidden="true" />
       </div>

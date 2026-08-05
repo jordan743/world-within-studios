@@ -23,7 +23,7 @@ export default function NotFound() {
       <div className="nf-body">
         <div className="nf-num">404</div>
         <p className="nf-msg">Page not found.</p>
-        <Link to="/" className="nf-link">← Back to Studios</Link>
+        <Link to="/" className="nf-link">← Back to Productions</Link>
       </div>
     </div>
   )

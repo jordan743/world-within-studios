@@ -1,5 +1,5 @@
 /* ==========================================================================
-   World Within Studios — R2 content model
+   World Within Productions — R2 content model
    Single source of truth for navigation, projects, and podcast episodes.
    ========================================================================== */
 
@@ -59,7 +59,7 @@ export const HERO_SLIDES = [1, 2, 3, 4, 5, 6].map((n) => ({
   id: `hero-${n}`,
   src: `${A}/hero/hero-${n}.webp`,
   srcSet: `${A}/hero/hero-${n}.webp 1440w, ${A}/hero/hero-${n}@2x.webp 2880w`,
-  alt: 'World Within Studios film still, halftone treatment',
+  alt: 'World Within Productions film still, halftone treatment',
 }))
 
 export const HERO_INTERVAL_MS = 2600
@@ -83,7 +83,7 @@ export const STICKERS = [
 
 /* --------------------------------------------------------------------------
    Projects
-   `cover`  — the WORLD WITHIN STUDIOS "PRESENTS" styled cover (grid default)
+   `cover`  — the WORLD WITHIN PRODUCTIONS "PRESENTS" styled cover (grid default)
    `poster` — the real theatrical poster (revealed on hover)
    `blockBg` — full-bleed still used in the home page stack
    -------------------------------------------------------------------------- */
@@ -95,13 +95,13 @@ export const PROJECTS = [
     titleLines: ['HOW TO CHANGE', 'THE WORLD'],
     category: 'DOCUMENTARY SERIES',
     kind: 'film',
-    desc: 'How To Change The World is a documentary series that explores the transformative power of social entrepreneurship. Produced by World Within Studios and Religion of Sports, with executive producers Mark Cuban, Gotham Chopra, and Geralyn Dreyfous.',
+    desc: 'How To Change The World is a documentary series that explores the transformative power of social entrepreneurship. Produced by World Within Productions and Religion of Sports, with executive producers Mark Cuban, Gotham Chopra, and Geralyn Dreyfous.',
     cover: `${A}/covers/how-to-change-the-world.webp`,
     poster: `${A}/posters/how-to-change-the-world.webp`,
     blockBg: `${A}/blocks/htctw.webp`,
     details: {
       Format: 'Documentary Series',
-      Producers: 'World Within Studios, Religion of Sports',
+      Producers: 'World Within Productions, Religion of Sports',
       'Exec. Producers': 'Mark Cuban, Gotham Chopra, Geralyn Dreyfous',
     },
   },
@@ -168,7 +168,7 @@ export const PROJECTS = [
        `heroStill` keeps that separate from `blockBg`, which is the home stack's
        image and should stay as it is. Shares the artwork with /podcast. */
     heroStill: `${A}/pages/podcast-hero.webp`,
-    details: { Format: 'Podcast Series', Producer: 'World Within Studios', Partner: 'PRX' },
+    details: { Format: 'Podcast Series', Producer: 'World Within Productions', Partner: 'PRX' },
   },
   {
     slug: 'helenibelieve',
@@ -251,7 +251,7 @@ export const PODCAST = {
   cover: '/assets/poster-podcast.jpg',
   meta: [
     { label: 'FORMAT', value: 'Podcast Series' },
-    { label: 'PRODUCER', value: 'World Within Studios' },
+    { label: 'PRODUCER', value: 'World Within Productions' },
     { label: 'PARTNER', value: 'PRX' },
   ],
   links: [

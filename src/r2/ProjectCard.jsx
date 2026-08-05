@@ -4,7 +4,7 @@ import './ProjectCard.css'
 /**
  * Grid card — Figma "pg-card" (321×475 art + caption).
  *
- * Default state is the WORLD WITHIN STUDIOS "PRESENTS" styled cover; hovering
+ * Default state is the WORLD WITHIN PRODUCTIONS "PRESENTS" styled cover; hovering
  * (or focusing) cross-fades to the real poster. Touch devices get the poster
  * revealed on tap-through instead — see ProjectCard.css.
  */
@@ -17,7 +17,7 @@ export default function ProjectCard({ project, eager = false }) {
         <img
           className="r2card__cover"
           src={cover}
-          alt={`${title} — World Within Studios cover`}
+          alt={`${title} — World Within Productions cover`}
           loading={eager ? 'eager' : 'lazy'}
           decoding="async"
         />

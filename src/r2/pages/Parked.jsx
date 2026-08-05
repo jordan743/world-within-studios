@@ -30,7 +30,7 @@ export default function Parked({ title, blurb }) {
 export const BrandedEntertainment = () => (
   <Parked
     title="Branded Entertainment"
-    blurb="Work with World Within Studios on branded films and series that carry a point of view. This page is in production — get in touch in the meantime."
+    blurb="Work with World Within Productions on branded films and series that carry a point of view. This page is in production — get in touch in the meantime."
   />
 )
 

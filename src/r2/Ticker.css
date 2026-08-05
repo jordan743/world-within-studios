@@ -1,10 +1,12 @@
-/* Black marquee strip — Figma "ticker" (1684×37, black, 58px gap) */
+/* Black marquee strip — Figma 2499:4062 (black, 24/11px padding, 58px gap).
+   The wordmark is 16.39 tall and the bar 11px of padding either side, so the
+   strip stands 38px. */
 
 .r2ticker {
   position: relative;
   z-index: 2;
   background: var(--r2-ink);
-  height: 37px;
+  height: 38px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -25,7 +27,7 @@
 }
 
 .r2ticker__word {
-  height: 15px;
+  height: 16px;
   width: auto;
   flex: none;
   display: block;

@@ -47,8 +47,8 @@ export default function Nav({ tone = 'green' }) {
   return (
     <>
       <header className={`r2nav r2nav--${tone}`}>
-        <Link to="/" className="r2nav__logo" aria-label="World Within Studios — home">
-          <span className="r2logo" role="img" aria-label="World Within Studios" />
+        <Link to="/" className="r2nav__logo" aria-label="World Within Productions — home">
+          <span className="r2logo" role="img" aria-label="World Within Productions" />
         </Link>
 
         <button
@@ -70,8 +70,8 @@ export default function Nav({ tone = 'green' }) {
         {...(!open ? { inert: '' } : {})}
       >
         <div className="r2menu__bar">
-          <Link to="/" className="r2menu__logo" onClick={handleClose} aria-label="World Within Studios — home">
-            <span className="r2logo" role="img" aria-label="World Within Studios" />
+          <Link to="/" className="r2menu__logo" onClick={handleClose} aria-label="World Within Productions — home">
+            <span className="r2logo" role="img" aria-label="World Within Productions" />
           </Link>
           <button ref={closeRef} type="button" className="r2menu__close" onClick={handleClose}>
             CLOSE

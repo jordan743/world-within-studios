@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react'
 import './Loading.css'
 
-const SEEN_KEY = 'wws-intro-seen'
-
 /**
- * Retro intro — Figma 2420:12 (1440×810).
- * A wall of styled covers and stills behind the torn WORLD WITHIN STUDIOS card.
- * Shown over the home page once per session; auto-dismisses, click/key to skip.
+ * Retro intro — Figma 2499:3946 (1440×810).
+ * A wall of styled covers and stills behind the torn WORLD WITHIN PRODUCTIONS
+ * card. Plays on every visit to the home page — it used to be gated to once
+ * per session, which the client asked to drop — and auto-dismisses; click or
+ * key to skip. Reduced motion still skips it outright.
  */
 export default function Loading({ hold = 2400 }) {
-  // Skip entirely if this session has already seen it, or motion is reduced.
   const [state, setState] = useState(() => {
     if (typeof window === 'undefined') return 'done'
-    if (sessionStorage.getItem(SEEN_KEY)) return 'done'
     if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return 'done'
     return 'in'
   })
@@ -31,10 +29,7 @@ export default function Loading({ hold = 2400 }) {
 
   useEffect(() => {
     if (state !== 'out') return
-    const t = setTimeout(() => {
-      sessionStorage.setItem(SEEN_KEY, '1')
-      setState('done')
-    }, 520)
+    const t = setTimeout(() => setState('done'), 520)
     return () => clearTimeout(t)
   }, [state])
 
@@ -49,9 +44,9 @@ export default function Loading({ hold = 2400 }) {
       role="button"
       tabIndex={0}
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') skip() }}
-      aria-label="Enter World Within Studios"
+      aria-label="Enter World Within Productions"
     >
-      <img className="r2loading__wall" src="/assets/r2/pages/loading-intro.webp" alt="World Within Studios" />
+      <img className="r2loading__wall" src="/assets/r2/pages/loading-intro.webp" alt="World Within Productions" />
     </div>
   )
 }

@@ -20,15 +20,17 @@
   background: var(--r2-green);
 }
 
-/* Natural lockup is 1472×577 sitting at x=-11 in a 1440-wide clip. */
+/* Figma 2499:4215 — the lockup is 1491.9×512.4, tilted 1.52deg and hung past
+   the left edge of a 1440-wide clip so PRESENTS runs off the bottom. */
 .r2footer__lockup {
   position: absolute;
-  top: 0;
-  left: -0.76%;
-  width: 102.22%;
+  top: 3.4%;
+  left: -1.75%;
+  width: 103.6%;
   height: auto;
   max-width: none;
   display: block;
+  transform: rotate(1.52deg);
 }
 
 /* Keep the paper texture readable without greying the cream down. */

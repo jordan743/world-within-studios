@@ -31,7 +31,7 @@
 
 .r2nav__logo {
   display: block;
-  width: 178px;
+  width: 182px;
   flex: none;
   color: inherit;
 }
@@ -41,10 +41,10 @@
 .r2logo {
   display: block;
   width: 100%;
-  aspect-ratio: 178.298 / 51.5168;
+  aspect-ratio: 181.691 / 51.516;
   background-color: currentColor;
-  -webkit-mask: url('/assets/r2/logo-wws-currentcolor.svg') no-repeat center / contain;
-  mask: url('/assets/r2/logo-wws-currentcolor.svg') no-repeat center / contain;
+  -webkit-mask: url('/assets/r2/logo-wwp-currentcolor.svg') no-repeat center / contain;
+  mask: url('/assets/r2/logo-wwp-currentcolor.svg') no-repeat center / contain;
 }
 
 .r2nav__menu-btn {
@@ -119,7 +119,7 @@
   flex: none;
 }
 
-.r2menu__logo { display: block; width: 178px; color: inherit; }
+.r2menu__logo { display: block; width: 182px; color: inherit; }
 
 .r2menu__close {
   font-family: var(--r2-display);

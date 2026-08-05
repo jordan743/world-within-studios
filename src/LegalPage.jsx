@@ -1,4 +1,5 @@
 import Nav from './r2/Nav.jsx'
+import Ticker from './r2/Ticker.jsx'
 import Footer from './r2/Footer.jsx'
 import './Studios.css'
 import './LegalPage.css'
@@ -26,8 +27,11 @@ function LegalLayout({ headline, effectiveDate, children }) {
       </div>
       <div className="lp-body">{children}</div>
       <div className="ww-display" aria-hidden="true">
-        <img src="/assets/logo-studios.svg" alt="" />
+        <img src="/assets/logo-productions.svg" alt="" />
       </div>
+      {/* The only pages that were missing it — every other page with a footer
+          already closes out on the ticker. */}
+      <Ticker />
       <Footer />
     </div>
   )

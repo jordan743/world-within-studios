@@ -2,10 +2,33 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/assets/logo-white.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>World Within Studios</title>
-    <meta name="description" content="World Within Studios — We Make Good Cool." />
+
+    <title>World Within Productions</title>
+    <meta name="description" content="World Within Productions — We Make Good Cool." />
+
+    <!-- The sticker mark. .ico first, for anything that ignores the PNGs. -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png" />
+
+    <!-- Share card. JPEG rather than WebP: several crawlers still will not
+         render a WebP preview. og:image has to be an absolute URL, so this
+         needs updating if the domain changes. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="World Within Productions" />
+    <meta property="og:title" content="World Within Productions" />
+    <meta property="og:description" content="World Within Productions — We Make Good Cool." />
+    <meta property="og:image" content="https://world-within-studios.vercel.app/assets/social-share.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="World Within Productions presents" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="World Within Productions" />
+    <meta name="twitter:description" content="World Within Productions — We Make Good Cool." />
+    <meta name="twitter:image" content="https://world-within-studios.vercel.app/assets/social-share.jpg" />
   </head>
   <body>
     <div id="root"></div>

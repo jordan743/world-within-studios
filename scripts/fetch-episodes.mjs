@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Pull the latest uploads from the World Within Studios YouTube channel into
+ * Pull the latest uploads from the World Within Productions YouTube channel into
  * src/r2/episodes.generated.json, which the podcast page reads for both the
  * thumbnail grid and the list view.
  *

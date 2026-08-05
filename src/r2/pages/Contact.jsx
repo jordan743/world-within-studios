@@ -23,7 +23,7 @@ export default function Contact() {
   // form is functional rather than decorative.
   const handleSubmit = (e) => {
     e.preventDefault()
-    const subject = values.subject || 'World Within Studios enquiry'
+    const subject = values.subject || 'World Within Productions enquiry'
     const body = [
       `Name: ${values.name}`,
       `Email: ${values.email}`,
@@ -72,7 +72,7 @@ export default function Contact() {
             <div className="r2contact__note">
               <p className="r2-label">NO UNSOLICITED SUBMISSIONS</p>
               <p>
-                World Within Studios does not accept unsolicited submissions, pitches, or screeners.
+                World Within Productions does not accept unsolicited submissions, pitches, or screeners.
                 Messages sent through this form are read, but sending material does not create any
                 obligation to review, respond, or keep it confidential.
               </p>
