@@ -20,6 +20,7 @@ const DOT_SIZE = 108
 const EDGE_GAP = 300    // px of clear space between dot edges
 const GAP_JITTER = 90   // random extra travel, so the frequency varies
 const MAX_DOTS = 60     // oldest drop off past this
+const SAFE_PAD = 14     // clearance kept around anything marked data-dots="avoid"
 
 export default function DotTrail() {
   const [dots, setDots] = useState([])
@@ -36,12 +37,45 @@ export default function DotTrail() {
     let seq = 0
     let needed = DOT_SIZE + EDGE_GAP + Math.random() * GAP_JITTER
 
+    /* Regions a dot must never cover — the legal links and the social icons,
+       which a 108px dot swallows whole. Measured relative to the host, so the
+       offsets survive scrolling and only a resize can invalidate them. */
+    let blocked = []
+    const measure = () => {
+      const hostRect = host.getBoundingClientRect()
+      blocked = [...host.querySelectorAll('[data-dots="avoid"]')].map((el) => {
+        const r = el.getBoundingClientRect()
+        return {
+          left: r.left - hostRect.left - SAFE_PAD,
+          top: r.top - hostRect.top - SAFE_PAD,
+          right: r.right - hostRect.left + SAFE_PAD,
+          bottom: r.bottom - hostRect.top + SAFE_PAD,
+        }
+      })
+    }
+    measure()
+    window.addEventListener('resize', measure)
+
+    // Square test against the dot's box — conservative for a circle, which is
+    // the right way to be wrong when the point is to keep UI readable.
+    const covers = (x, y) => {
+      const r = DOT_SIZE / 2
+      return blocked.some(
+        (b) => x + r > b.left && x - r < b.right && y + r > b.top && y - r < b.bottom,
+      )
+    }
+
     const onMove = (e) => {
       const rect = host.getBoundingClientRect()
       const x = e.clientX - rect.left
       const y = e.clientY - rect.top
 
       if (last && Math.hypot(x - last.x, y - last.y) < needed) return
+
+      /* Skip without advancing `last` or re-rolling the threshold: the trail
+         then picks up the moment the cursor clears the blocked region, rather
+         than owing it another full gap's worth of travel. */
+      if (covers(x, y)) return
 
       const i = seq++
       last = { x, y }
@@ -55,7 +89,10 @@ export default function DotTrail() {
     }
 
     host.addEventListener('mousemove', onMove)
-    return () => host.removeEventListener('mousemove', onMove)
+    return () => {
+      host.removeEventListener('mousemove', onMove)
+      window.removeEventListener('resize', measure)
+    }
   }, [])
 
   return (

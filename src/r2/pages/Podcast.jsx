@@ -53,7 +53,7 @@ export default function Podcast() {
         {/* Exported caption bar in place of a live-text headline, matching the
             home stack and the case studies. It is the page's <h1> wrapping the
             image, so the alt text is the heading's accessible name. */}
-        <h1 className="r2pod__bar">
+        <h1 className="r2pod__caption">
           <img src={PODCAST.bar} alt={`${PODCAST.title} — ${PODCAST.subtitle}`} fetchPriority="high" />
         </h1>
 

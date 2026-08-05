@@ -22,13 +22,15 @@
 }
 
 /* Exported caption bar, full bleed straight off the hero — see Podcast.jsx.
-   The margin reset stops the heading's default spacing from breaking it away
-   from the image above. */
-.r2pod__bar {
+   Named `__caption`, not `__bar`: that one is already the episodes toolbar
+   further down, and reusing it blew the LATEST EPISODES chip up to full width.
+   The margin reset stops the heading's default spacing from breaking the bar
+   away from the image above. */
+.r2pod__caption {
   display: block;
   margin: 0;
 }
-.r2pod__bar img {
+.r2pod__caption img {
   display: block;
   width: 100%;
   height: auto;

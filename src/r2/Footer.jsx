@@ -70,12 +70,14 @@ export default function Footer() {
       </div>
 
       <div className="r2footer__bar">
-        <nav className="r2footer__legal" aria-label="Legal">
+        {/* `data-dots="avoid"` keeps the trail from stamping a dot over these —
+            see DotTrail.jsx. */}
+        <nav className="r2footer__legal" aria-label="Legal" data-dots="avoid">
           {LEGAL_LINKS.map((l) => (
             <Link key={l.to} to={l.to}>{l.label}</Link>
           ))}
         </nav>
-        <ul className="r2footer__socials">
+        <ul className="r2footer__socials" data-dots="avoid">
           {SOCIALS.map((s) => (
             <li key={s.id}>
               <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
