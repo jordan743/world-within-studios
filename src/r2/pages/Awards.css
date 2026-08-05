@@ -98,19 +98,17 @@
 }
 
 /* --- Headline nominations — Figma 2489:1360 --------------------------------
-   Three groups spread across the full 32px gutter, each set centred over two
-   authored lines. Figma's -1.44px on 36px and -1.12px on 28px are the same
-   -0.04em, so one value covers both as they scale down. */
+   Three groups spread across the row, each set centred over two authored
+   lines. Nested inside `.r2awards__body`, so the frame and gutter come from
+   that wrapper rather than being declared again here. Figma's -1.44px on 36px
+   and -1.12px on 28px are the same -0.04em, so one value covers both as they
+   scale down. */
 .r2awards__nominations {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 32px;
-  width: 100%;
-  max-width: var(--r2-frame);
-  margin: 0 auto;
-  padding-inline: var(--r2-gutter);
-  padding-bottom: 56px;
+  padding-block: 44px 56px;
   text-align: center;
 }
 
@@ -146,7 +144,7 @@
     flex-direction: column;
     align-items: center;
     gap: 26px;
-    padding-bottom: 40px;
+    padding-block: 32px 40px;
   }
 }
 

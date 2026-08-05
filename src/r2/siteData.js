@@ -149,8 +149,8 @@ export const PROJECTS = [
     blockBg: `${A}/blocks/podcast.webp`,
     /* There is no trailer, so the case study hero falls back to a still.
        `heroStill` keeps that separate from `blockBg`, which is the home stack's
-       image and should stay as it is. */
-    heroStill: `${A}/pages/podcast-casestudy-hero.webp`,
+       image and should stay as it is. Shares the artwork with /podcast. */
+    heroStill: `${A}/pages/podcast-hero.webp`,
     details: { Format: 'Podcast Series', Producer: 'World Within Studios', Partner: 'PRX' },
   },
   {
@@ -228,6 +228,9 @@ export const PODCAST = {
   subtitle: 'PODCAST SERIES',
   desc: 'Produced with PRX, How to Change the World features provocative conversations with the heroes among us—mission-driven founders, artists, thought leaders, and those on the front lines building a better world.',
   hero: `${A}/pages/podcast-hero.webp`,
+  /* Same exported caption bar the home stack and the case study use, in place
+     of a live-text headline — see ProjectBlock.jsx. */
+  bar: `${A}/bars/how-to-change-the-world-podcast.svg`,
   cover: '/assets/poster-podcast.jpg',
   meta: [
     { label: 'FORMAT', value: 'Podcast Series' },

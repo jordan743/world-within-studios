@@ -14,10 +14,25 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* The show's title card sits left of centre — bias the crop toward it so it
-     survives the narrower aspect ratios below. */
-  object-position: 34% center;
+  /* The artwork's own ratio is 2.182, the same as this frame, so at full width
+     the crop is a no-op. Anchor top so the stickers along the upper edge are
+     what survives at the narrower ratios below. */
+  object-position: center top;
   display: block;
+}
+
+/* Exported caption bar, full bleed straight off the hero — see Podcast.jsx.
+   The margin reset stops the heading's default spacing from breaking it away
+   from the image above. */
+.r2pod__bar {
+  display: block;
+  margin: 0;
+}
+.r2pod__bar img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1440 / 238;
 }
 
 /* --- Meta block ----------------------------------------------------------- */
@@ -27,23 +42,6 @@
   gap: 64px;
   align-items: start;
   padding-block: 64px 24px;
-}
-
-.r2pod__title {
-  font-family: var(--r2-display);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -0.03em;
-  line-height: 0.96;
-  font-size: clamp(30px, 4.2vw, 54px);
-  color: var(--r2-cream);
-  margin: 0 0 24px;
-}
-.r2pod__title span { display: block; }
-.r2pod__title em {
-  display: block;
-  font-style: normal;
-  color: var(--r2-cream-40);
 }
 
 .r2pod__facts {

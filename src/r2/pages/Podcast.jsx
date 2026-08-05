@@ -47,15 +47,18 @@ export default function Podcast() {
       <main>
         {/* Hero banner is a composed graphic in Figma (2430:2759) */}
         <section className="r2pod__hero">
-          <img src={PODCAST.hero} alt="How to Change the World" />
+          <img src={PODCAST.hero} alt="" aria-hidden="true" />
         </section>
+
+        {/* Exported caption bar in place of a live-text headline, matching the
+            home stack and the case studies. It is the page's <h1> wrapping the
+            image, so the alt text is the heading's accessible name. */}
+        <h1 className="r2pod__bar">
+          <img src={PODCAST.bar} alt={`${PODCAST.title} — ${PODCAST.subtitle}`} fetchPriority="high" />
+        </h1>
 
         <section className="r2-wrap r2pod__meta">
           <div className="r2pod__meta-copy">
-            <h1 className="r2pod__title">
-              {PODCAST.titleLines.map((l) => <span key={l}>{l}</span>)}
-              <em>{PODCAST.subtitle}</em>
-            </h1>
             <p className="r2-body-copy">{PODCAST.desc}</p>
 
             <dl className="r2pod__facts">
