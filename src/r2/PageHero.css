@@ -37,6 +37,14 @@
   mix-blend-mode: normal;
 }
 
+/* Hold the artwork's left edge. At full width there is no crop and this is a
+   no-op, but the narrow breakpoints crop hard horizontally, and centring put
+   the dark half of the halftone directly under the nav — where an ink logo
+   simply vanished. The left edge keeps a light ground beneath it. */
+.r2phero.is-bleed .r2phero__banner > img {
+  object-position: left center;
+}
+
 /* Flat colour field the halftone multiplies into. */
 .r2phero__banner::before {
   content: '';
