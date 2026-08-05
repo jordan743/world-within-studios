@@ -3,9 +3,13 @@
    Figma: component set 2430:3325 (Default / off-white / BLACK)
    ========================================================================== */
 
+/* Measured off the viewport, not the 1440 content frame. Capping it there put
+   the logo at 68px in a 1512px window — the gutter plus 36px of centring slack
+   — while the artwork behind bled to 0. The nav sits on the page edge, so the
+   gutter is the whole story. */
 .r2nav {
   position: absolute;
-  top: 36px;
+  top: var(--r2-gutter-nav);
   left: 0;
   right: 0;
   z-index: 40;
@@ -14,8 +18,6 @@
   justify-content: space-between;
   gap: 24px;
   width: 100%;
-  max-width: var(--r2-frame);
-  margin: 0 auto;
   padding-inline: var(--r2-gutter-nav);
   pointer-events: none;
 }
@@ -68,16 +70,6 @@
   .r2nav__menu-btn { font-size: 32px; }
 }
 
-/* Flush — used over a full-bleed hero, where the nav is measured off the
-   viewport rather than the 1440 content frame. Without it a 1512px window
-   pushes the logo out to 68px (36px of centring slack plus the gutter) while
-   the artwork behind bleeds to 0, so the hero reads as unevenly inset. Declared
-   after the breakpoints above so its `top` survives them; the small-screen
-   offsets stay as they were, since 32px of headroom is a lot on a phone. */
-.r2nav--flush { max-width: none; }
-@media (min-width: 901px) {
-  .r2nav--flush { top: var(--r2-gutter-nav); }
-}
 
 /* --------------------------------------------------------------------------
    Overlay
@@ -120,9 +112,9 @@
   justify-content: space-between;
   gap: 24px;
   width: 100%;
-  max-width: var(--r2-frame);
-  margin: 0 auto;
-  padding: 36px var(--r2-gutter-nav) 0;
+  /* Same gutter and top offset as the closed nav, and uncapped for the same
+     reason — otherwise the logo jumps sideways the moment the menu opens. */
+  padding: var(--r2-gutter-nav) var(--r2-gutter-nav) 0;
   color: var(--r2-green);
   flex: none;
 }
@@ -150,8 +142,6 @@
   justify-content: center;
   gap: clamp(2px, 0.6vh, 10px);
   width: 100%;
-  max-width: var(--r2-frame);
-  margin: 0 auto;
   padding: 4vh var(--r2-gutter-nav);
   min-height: 0;
 }
@@ -185,8 +175,6 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: var(--r2-frame);
-  margin: 0 auto;
   padding: 0 var(--r2-gutter-nav) 40px;
   flex: none;
 }

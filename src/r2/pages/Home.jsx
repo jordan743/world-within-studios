@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <div className="r2-page">
       <Loading />
-      <Nav tone="green" flush />
+      <Nav tone="green" />
       <main>
         <Hero />
         <Ticker />

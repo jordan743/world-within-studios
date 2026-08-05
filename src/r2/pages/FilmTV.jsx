@@ -11,8 +11,8 @@ import './ProjectGrid.css'
 export default function FilmTV() {
   return (
     <div className="r2-page">
-      {/* Ink over the yellow the banner now runs under, flush to its edges. */}
-      <Nav tone="ink" flush />
+      {/* Ink, to read against the yellow the banner now runs under. */}
+      <Nav tone="ink" />
       <main>
         <PageHero
           title="Film & Television"

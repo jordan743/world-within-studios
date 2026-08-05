@@ -25,8 +25,8 @@ function pickStickers() {
  * `bleed` runs the banner edge to edge and up under the nav, for artwork that
  * already carries its own colour field — the tint, multiply blend and grain
  * that build the look for framed banners are all dropped, since the file has
- * them baked in. Pair it with a `flush`, dark-toned <Nav> so the nav reads
- * against the artwork it now sits on. `aspect` sets the banner's shape;
+ * them baked in. Pair it with a dark-toned <Nav> so it reads against the
+ * artwork it now sits on. `aspect` sets the banner's shape;
  * a bleeding banner should be given its image's own ratio.
  */
 export default function PageHero({
