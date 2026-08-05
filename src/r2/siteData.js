@@ -147,6 +147,10 @@ export const PROJECTS = [
     cover: `${A}/covers/how-to-change-the-world.webp`,
     poster: '/assets/poster-podcast.jpg',
     blockBg: `${A}/blocks/podcast.webp`,
+    /* There is no trailer, so the case study hero falls back to a still.
+       `heroStill` keeps that separate from `blockBg`, which is the home stack's
+       image and should stay as it is. */
+    heroStill: `${A}/pages/podcast-casestudy-hero.webp`,
     details: { Format: 'Podcast Series', Producer: 'World Within Studios', Partner: 'PRX' },
   },
   {

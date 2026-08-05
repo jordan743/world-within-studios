@@ -18,6 +18,22 @@
   display: block;
 }
 
+/* --- Caption bar ----------------------------------------------------------
+   Exported from Figma and run full bleed straight under the trailer, exactly
+   as on the home stack, so it scales as one piece with the optically-stretched
+   lettering intact. It is an <h1> wrapping the image; the margin reset stops
+   the heading's default spacing from breaking the bar off the video. */
+.r2cs__bar {
+  display: block;
+  margin: 0;
+}
+.r2cs__bar img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1440 / 238;
+}
+
 /* --- Intro ---------------------------------------------------------------- */
 .r2cs__intro {
   display: grid;
@@ -26,30 +42,6 @@
   align-items: start;
   padding-block: 64px 72px;
 }
-
-.r2cs__title {
-  font-family: var(--r2-display);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -0.03em;
-  line-height: 0.96;
-  font-size: clamp(30px, 4.2vw, 56px);
-  color: var(--r2-cream);
-  margin: 0;
-}
-
-.r2cs__cat {
-  font-family: var(--r2-display);
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -0.025em;
-  line-height: 1;
-  font-size: clamp(24px, 3.4vw, 46px);
-  color: var(--r2-cream-40);
-  margin: 6px 0 0;
-}
-
-.r2cs__desc { margin-top: 26px; }
 
 .r2cs__facts {
   display: flex;

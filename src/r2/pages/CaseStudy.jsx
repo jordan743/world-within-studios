@@ -12,7 +12,7 @@ export default function CaseStudy() {
   const project = projectBySlug(slug)
   if (!project) return <Navigate to="/404" replace />
 
-  const { title, category, desc, poster, details, trailer, trailerLocal } = project
+  const { title, category, desc, poster, details, trailer, trailerLocal, bar } = project
   // Films only — the podcast shares the HTCTW cover art and would read as a dupe.
   const more = FILM_PROJECTS.filter((p) => p.slug !== slug).slice(0, 5)
 
@@ -22,10 +22,17 @@ export default function CaseStudy() {
       <main>
         <TrailerHero project={project} />
 
+        {/* The same exported caption bar the home stack uses, carrying the
+            title and category as artwork instead of live text — the lettering
+            is optically stretched to fill its panels and no web type setting
+            matches it. It stays the page's <h1>: the alt text is the heading's
+            accessible name, so the document outline is unchanged. */}
+        <h1 className="r2cs__bar">
+          <img src={bar} alt={`${title} — ${category}`} fetchPriority="high" />
+        </h1>
+
         <section className="r2-wrap r2cs__intro">
           <div className="r2cs__copy">
-            <h1 className="r2cs__title">{title}</h1>
-            <p className="r2cs__cat">{category}</p>
             <p className="r2-body-copy r2cs__desc">{desc}</p>
 
             {details ? (
