@@ -10,21 +10,18 @@
   padding-block: 42px 44px;
 }
 
+/* Fills the band and is cropped to it — the section keeps the height its
+   padding gives it, and the artwork covers whatever that comes out to. */
 .r2cta__bg {
   position: absolute;
-  right: -6%;
-  top: -60%;
-  width: 62%;
-  height: 260%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  object-position: 30% 40%;
-  mix-blend-mode: multiply;
-  opacity: 0.95;
+  object-position: center;
   z-index: 0;
   pointer-events: none;
 }
-
-.r2cta .r2-grain { z-index: 1; opacity: 0.35; }
 
 .r2cta__inner {
   position: relative;
@@ -47,7 +44,7 @@
 .r2cta__action {
   display: inline-block;
   font-family: var(--r2-display);
-  font-weight: 800;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: -0.02em;
   font-size: clamp(22px, 3.1vw, 44px);
@@ -62,6 +59,8 @@
 
 @media (max-width: 600px) {
   .r2cta { padding-block: 30px 34px; }
-  .r2cta__bg { width: 78%; right: -14%; opacity: 0.75; }
+  /* The dark half of the artwork the copy sits on is on its left, so hold that
+     edge in frame as the band narrows rather than centring the crop. */
+  .r2cta__bg { object-position: left center; }
   .r2cta__heading { margin-bottom: 18px; }
 }

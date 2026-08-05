@@ -11,8 +11,10 @@ export default function CtaBand({
 }) {
   return (
     <section className="r2cta">
-      <img className="r2cta__bg" src="/assets/r2/pages/filmtv-hero.webp" alt="" aria-hidden="true" loading="lazy" />
-      <span className="r2-grain" aria-hidden="true" />
+      {/* Finished halftone artwork — it carries its own colour and texture, so
+          it fills the band outright rather than multiplying into a yellow
+          plate under a grain layer the way it used to. */}
+      <img className="r2cta__bg" src="/assets/r2/pages/cta-bg.webp" alt="" aria-hidden="true" loading="lazy" />
       <div className="r2-wrap r2cta__inner">
         <h2 className="r2cta__heading">
           {heading.split('\n').map((line) => (
