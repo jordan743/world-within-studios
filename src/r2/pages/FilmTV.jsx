@@ -11,12 +11,14 @@ import './ProjectGrid.css'
 export default function FilmTV() {
   return (
     <div className="r2-page">
-      <Nav tone="green" />
+      {/* Ink over the yellow the banner now runs under, flush to its edges. */}
+      <Nav tone="ink" flush />
       <main>
         <PageHero
           title="Film & Television"
           image="/assets/r2/pages/filmtv-hero.webp"
-          tint="yellow"
+          bleed
+          aspect="1999 / 872"
         />
 
         <section className="r2-wrap r2grid-section">

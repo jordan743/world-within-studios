@@ -14,9 +14,27 @@
   max-width: var(--r2-frame);
   margin: 0 auto;
   padding-inline: var(--r2-gutter);
-  aspect-ratio: 1312 / 500;
+  aspect-ratio: var(--ar, 1312 / 500);
   overflow: visible;
   isolation: isolate;
+}
+
+/* --- Bleed variant --------------------------------------------------------
+   Edge to edge and up under the nav. The artwork carries its own colour field,
+   so the tint plate, the multiply blend and the grain are all off — see
+   PageHero.jsx. Only the dots stay on top. The title below keeps the 1440
+   content frame; it is the banner alone that bleeds. */
+.r2phero.is-bleed { padding-top: 0; }
+
+.r2phero.is-bleed .r2phero__banner {
+  max-width: none;
+  padding-inline: 0;
+}
+.r2phero.is-bleed .r2phero__banner > img,
+.r2phero.is-bleed .r2phero__dots {
+  inset: 0;
+  width: 100%;
+  mix-blend-mode: normal;
 }
 
 /* Flat colour field the halftone multiplies into. */
