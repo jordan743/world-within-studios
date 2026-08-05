@@ -5,9 +5,10 @@ import CtaBand from '../CtaBand.jsx'
 import './Parked.css'
 
 /**
- * Branded Entertainment and Where We Work are built but not yet in the menu —
- * the routes stay live so they can be switched on later by clearing the
- * `hidden` flag in siteData.js › NAV_ITEMS.
+ * Branded Entertainment and Where We Work are built but parked: App.jsx does
+ * not route them, so both URLs 404 and search engines have nothing to index.
+ * To switch them on, add the two routes back in App.jsx and their entries to
+ * siteData.js › NAV_ITEMS. Nothing imports this file in the meantime.
  */
 export default function Parked({ title, blurb }) {
   return (

@@ -7,7 +7,6 @@ import Podcast from './r2/pages/Podcast.jsx'
 import Awards from './r2/pages/Awards.jsx'
 import Contact from './r2/pages/Contact.jsx'
 import CaseStudy from './r2/pages/CaseStudy.jsx'
-import { BrandedEntertainment, MapPage } from './r2/pages/Parked.jsx'
 
 import NotFound from './NotFound.jsx'
 import { TermsOfUsePage, PrivacyPolicyPage, DisclaimerPage, CookiesPolicyPage } from './LegalPage.jsx'
@@ -30,14 +29,19 @@ export default function App() {
         <Route path="/awards" element={<Awards />} />
         <Route path="/contact" element={<Contact />} />
 
-        {/* Built but kept out of the menu for now — see siteData.js NAV_ITEMS */}
-        <Route path="/branded-entertainment" element={<BrandedEntertainment />} />
-        <Route path="/map" element={<MapPage />} />
+        {/* Branded Entertainment and Where We Work are unrouted on purpose so
+            they 404 and stay out of search results. src/r2/pages/Parked.jsx
+            still holds them — re-add the two routes and their NAV_ITEMS
+            entries to switch them back on. */}
 
         <Route path="/terms-of-use" element={<TermsOfUsePage />} />
         <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         <Route path="/disclaimer" element={<DisclaimerPage />} />
         <Route path="/cookies-policy" element={<CookiesPolicyPage />} />
+
+        {/* Must be explicit: CaseStudy redirects unknown slugs here, and "/404"
+            would otherwise match /:slug and bounce back to itself forever. */}
+        <Route path="/404" element={<NotFound />} />
 
         {/* Catch-all project slugs last so the named routes win. */}
         <Route path="/:slug" element={<CaseStudy />} />

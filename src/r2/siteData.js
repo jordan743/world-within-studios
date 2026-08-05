@@ -11,15 +11,16 @@ const A = '/assets/r2'
 
 /* --------------------------------------------------------------------------
    Navigation
-   `hidden: true` keeps the route alive but takes the item out of the menu.
-   Branded Entertainment and Map / Where We Work are parked for future use.
+   `hidden: true` keeps a route alive but takes the item out of the menu.
+   Branded Entertainment ('/branded-entertainment') and Where We Work ('/map')
+   are parked for future use — their pages live in pages/Parked.jsx but they
+   are deliberately unrouted in App.jsx so the URLs 404 and stay unindexed.
+   Restoring them means adding the routes back *and* the entries here.
    -------------------------------------------------------------------------- */
 export const NAV_ITEMS = [
   { label: 'FILM & TELEVISION', to: '/film-tv' },
   { label: 'PODCAST', to: '/podcast' },
-  { label: 'BRANDED ENTERTAINMENT', to: '/branded-entertainment', hidden: true },
   { label: 'AWARDS / PRESS', to: '/awards' },
-  { label: 'WHERE WE WORK', to: '/map', hidden: true },
   { label: 'GET IN TOUCH', to: '/contact' },
 ]
 
