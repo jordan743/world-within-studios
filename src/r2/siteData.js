@@ -255,6 +255,27 @@ export const ALL_EPISODES = YT_FEED.episodes
 /* --------------------------------------------------------------------------
    Awards / Press — laurels sliced from Figma rows 2425:1791 … 2425:1795
    -------------------------------------------------------------------------- */
+/* Headline nominations, called out above the laurels — Figma 2489:1360. */
+export const AWARD_NOMINATIONS = [
+  { id: 'golden-globe', title: ['GOLDEN GLOBE®', 'NOMINEE'], category: ['BEST MOTION PICTURE,', 'NON-ENGLISH LANGUAGE'] },
+  { id: 'academy-award', title: ['ACADEMY AWARD®', 'NOMINEE'], category: ['BEST INTERNATIONAL', 'FEATURE FILM'] },
+  { id: 'bafta', title: ['BAFTA®', 'NOMINEE'], category: ['FILM NOT IN THE', 'ENGLISH LANGUAGE'] },
+]
+
+/* The festivals the user wants leading both views, in this order. Anything not
+   named here keeps its original position and falls in behind Washington West. */
+const AWARDS_LEAD_ORDER = [
+  'sxsw-shuffle',
+  'docnyc-2023',
+  'slamdance-2024',
+  'santa-barbara',
+  'big-sky-2024',
+  'indy-film-2023',
+  'signal-silver-2023',
+  'dcdox-2023',
+  'washington-west-2023',
+]
+
 export const AWARDS = [
   { id: 'sxsw-shuffle', alt: 'SXSW Film & TV Festival 2025 — Documentary Feature Jury Award Winner' },
   { id: 'anthem-2025', alt: 'Anthem Awards 2025 — Silver Winner' },
@@ -280,4 +301,15 @@ export const AWARDS = [
   { id: 'santa-barbara', alt: 'Santa Barbara International Film Festival — Official Selection' },
   { id: 'ojai-best-doc-short', alt: 'Ojai Film Festival 2023 — Winner, Best Documentary Short' },
   { id: 'slamdance-2024', alt: 'Slamdance Film Festival 2024' },
-].map((a) => ({ ...a, src: `${A}/awards/${a.id}.webp` }))
+]
+  .map((a) => ({ ...a, src: `${A}/awards/${a.id}.webp` }))
+  .sort((a, b) => {
+    /* Lead-order entries first, in the order listed; everything else keeps its
+       original sequence behind them. `indexOf` returns -1 for unlisted ids, so
+       map those to Infinity rather than letting them sort ahead of the leads. */
+    const rank = (x) => {
+      const i = AWARDS_LEAD_ORDER.indexOf(x.id)
+      return i === -1 ? Infinity : i
+    }
+    return rank(a) - rank(b)
+  })

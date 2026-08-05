@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import Nav from '../Nav.jsx'
 import Ticker from '../Ticker.jsx'
 import Footer from '../Footer.jsx'
-import { AWARDS } from '../siteData.js'
+import { AWARDS, AWARD_NOMINATIONS } from '../siteData.js'
 import './Awards.css'
 
 function GridIcon() {
@@ -107,6 +107,28 @@ export default function Awards() {
       <main>
         <section className="r2-wrap r2awards__head">
           <h1 className="r2-display">Awards / Press</h1>
+        </section>
+
+        {/* Headline nominations — Figma 2489:1360. Sits above the laurels and
+            stays put across both views, since it reads as part of the page
+            header rather than as another row of the collection below. The line
+            breaks are authored, not wrapped: each group is set as two centred
+            lines in the design. */}
+        <section className="r2awards__nominations" aria-label="Headline nominations">
+          {AWARD_NOMINATIONS.map((n) => (
+            <div key={n.id} className="r2awards__nom">
+              <p className="r2awards__nom-title">
+                {n.title.map((line, i) => (
+                  <Fragment key={line}>{i ? <br /> : null}{line}</Fragment>
+                ))}
+              </p>
+              <p className="r2awards__nom-cat">
+                {n.category.map((line, i) => (
+                  <Fragment key={line}>{i ? <br /> : null}{line}</Fragment>
+                ))}
+              </p>
+            </div>
+          ))}
         </section>
 
         <section className="r2-wrap r2awards__body">

@@ -94,7 +94,60 @@
 .r2awards__distinction {
   font-size: 13.5px;
   line-height: 1.45;
+  color: var(--r2-green);
+}
+
+/* --- Headline nominations — Figma 2489:1360 --------------------------------
+   Three groups spread across the full 32px gutter, each set centred over two
+   authored lines. Figma's -1.44px on 36px and -1.12px on 28px are the same
+   -0.04em, so one value covers both as they scale down. */
+.r2awards__nominations {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 32px;
+  width: 100%;
+  max-width: var(--r2-frame);
+  margin: 0 auto;
+  padding-inline: var(--r2-gutter);
+  padding-bottom: 56px;
+  text-align: center;
+}
+
+.r2awards__nom {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.r2awards__nom-title,
+.r2awards__nom-cat {
+  font-family: var(--r2-display);
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  text-transform: uppercase;
+  margin: 0;
+}
+.r2awards__nom-title {
+  font-weight: 700;
+  font-size: clamp(20px, 2.5vw, 36px);
+  color: var(--r2-green);
+}
+.r2awards__nom-cat {
+  font-weight: 500;
+  font-size: clamp(15px, 1.95vw, 28px);
   color: var(--r2-cream-55);
+}
+
+/* Below the laurel grid's own two-column breakpoint the three groups no longer
+   fit side by side — stack them and let each run as one centred column. */
+@media (max-width: 700px) {
+  .r2awards__nominations {
+    flex-direction: column;
+    align-items: center;
+    gap: 26px;
+    padding-bottom: 40px;
+  }
 }
 
 @media (max-width: 1024px) {
