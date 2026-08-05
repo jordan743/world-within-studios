@@ -3,6 +3,10 @@ import DotTrail from './DotTrail.jsx'
 import { LEGAL_LINKS, SOCIALS } from './siteData.js'
 import './Footer.css'
 
+/* Footer-only, so the counter-shapes in the YouTube and Spotify marks are
+   painted `--r2-green` to sit on the footer's own ground — the same read as the
+   Apple mark's true knockout. Moving this row onto any other background means
+   re-cutting those two as knockouts rather than just retinting them. */
 const ICONS = {
   linkedin: (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -21,15 +25,15 @@ const ICONS = {
   youtube: (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
-      <polygon points="9.9 15 15.4 12 9.9 9" fill="var(--r2-cream)" />
+      <polygon points="9.9 15 15.4 12 9.9 9" fill="var(--r2-green)" />
     </svg>
   ),
   spotify: (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <circle cx="12" cy="12" r="10" />
-      <path d="M7.6 14.7c2.6-1 5.9-1 8.5.1" stroke="var(--r2-cream)" strokeWidth="1.5" strokeLinecap="round" fill="none" />
-      <path d="M6.8 11.6c3.2-1.25 7-1.25 10.3.1" stroke="var(--r2-cream)" strokeWidth="1.6" strokeLinecap="round" fill="none" />
-      <path d="M6.2 8.5c3.7-1.35 8-1.35 11.6.1" stroke="var(--r2-cream)" strokeWidth="1.7" strokeLinecap="round" fill="none" />
+      <path d="M7.6 14.7c2.6-1 5.9-1 8.5.1" stroke="var(--r2-green)" strokeWidth="1.5" strokeLinecap="round" fill="none" />
+      <path d="M6.8 11.6c3.2-1.25 7-1.25 10.3.1" stroke="var(--r2-green)" strokeWidth="1.6" strokeLinecap="round" fill="none" />
+      <path d="M6.2 8.5c3.7-1.35 8-1.35 11.6.1" stroke="var(--r2-green)" strokeWidth="1.7" strokeLinecap="round" fill="none" />
     </svg>
   ),
   /* Apple's own Podcasts (iOS) mark. One compound path — the rounded square is

@@ -490,35 +490,6 @@
   display: block;
 }
 
-/* ── Quote Section ────────────────────────────────────────────── */
-
-.quote-section {
-  padding: 40px 160px 64px;
-  text-align: center;
-}
-
-.quote-section__text {
-  font-family: var(--font-b);
-  font-size: clamp(13px, 1.4vw, 18px);
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  line-height: 1.7;
-  text-transform: uppercase;
-  color: rgba(255,244,226,0.75);
-  quotes: none;
-}
-
-.quote-section__attr {
-  display: block;
-  font-family: var(--font-b);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255,244,226,0.4);
-  margin-top: 20px;
-  font-style: normal;
-}
 
 /* ── Footer ───────────────────────────────────────────────────── */
 
@@ -591,7 +562,6 @@
   .proj-dual__panel--right { display: none; }
   .proj-dual__content { padding: 0 32px; }
 
-  .quote-section { padding: 40px 48px 56px; }
   .wws-footer { padding: 24px 32px; }
 }
 
@@ -622,8 +592,6 @@
   .proj-dual__content { padding: 0 20px; bottom: 32px; }
 
   .ww-display { padding: 32px 16px; }
-  .quote-section { padding: 32px 24px 48px; }
-  .quote-section__text { font-size: 12px; }
 
   .wws-footer {
     padding: 20px;

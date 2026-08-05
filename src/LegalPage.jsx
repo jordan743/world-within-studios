@@ -28,13 +28,6 @@ function LegalLayout({ headline, effectiveDate, children }) {
       <div className="ww-display" aria-hidden="true">
         <img src="/assets/logo-studios.svg" alt="" />
       </div>
-      <section className="quote-section">
-        <blockquote className="quote-section__text">
-          "THE ONE PERFECTLY DIVINE THING, THE ONE GLIMPSE OF GOD'S PARADISE GIVEN ON EARTH,
-          IS TO FIGHT A LOSING BATTLE — AND NOT LOSE IT."
-        </blockquote>
-        <cite className="quote-section__attr">— G.K. CHESTERTON</cite>
-      </section>
       <Footer />
     </div>
   )
