@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "rewrites": [
     {
-      "source": "/((?!assets/|fonts/|favicon\\.svg|icons\\.svg).*)",
+      "source": "/((?!assets/|fonts/|favicon|icons\\.svg).*)",
       "destination": "/index.html"
     }
   ],
